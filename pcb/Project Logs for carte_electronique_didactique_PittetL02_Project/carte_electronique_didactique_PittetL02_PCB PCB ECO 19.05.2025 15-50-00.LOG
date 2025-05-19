@@ -1,0 +1,231 @@
+Added Component: Designator=C1(C_0805 tantale)
+Added Component: Designator=C2(C_0805 tantale)
+Added Component: Designator=C3(C_0805 ceramique)
+Added Component: Designator=C4(C_0805 ceramique)
+Added Component: Designator=C5(C_0805 ceramique)
+Added Component: Designator=C6(C_0805 ceramique)
+Added Component: Designator=C7(CTHTNP8x4x11e5)
+Add component (AddParameter): Name = "EMF_PN"; Value = "CCER_THT-11"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number 1"; Value = "K104M15X7RF5UH5"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Type"; Value = "CX7R"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "0.1uF"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Volt"; Value = "50V"; VariantName = "[No Variations]"
+Added Component: Designator=C8(C_0805 ceramique)
+Added Component: Designator=C9(C_0805 ceramique)
+Added Component: Designator=C10(C_0805 ceramique)
+Added Component: Designator=C11(C_0805 ceramique)
+Added Component: Designator=K1(LMC6482_SMD)
+Added Component: Designator=K3(LMC6482_THT)
+Added Component: Designator=K4(PIC16F15214-I/SN)
+Added Component: Designator=P1(LED)
+Added Component: Designator=Q1(SFH-3310_EN)
+Added Component: Designator=Q2(SFH-3310_EN)
+Added Component: Designator=R1(Diode Protection)
+Added Component: Designator=R2(Resistances 1206)
+Add component (AddParameter): Name = "Manufacturer"; Value = "Panasonic"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer 1"; Value = "Panasonic"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number 1"; Value = "ERA-6AEB472V"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Part Number"; Value = "ERA6AEB472V"; VariantName = "[No Variations]"
+Added Component: Designator=R3(Resistances 1206)
+Add component (AddParameter): Name = "Manufacturer"; Value = "Panasonic"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer 1"; Value = "Panasonic"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number 1"; Value = "ERA-6AEB472V"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Part Number"; Value = "ERA6AEB472V"; VariantName = "[No Variations]"
+Added Component: Designator=R4(RTHT0250W)
+Add component (AddParameter): Name = "EMF_PN"; Value = "RMETAL0250W-52"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Power"; Value = "0.5W"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Stab(ppm)"; Value = "100"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Tol"; Value = "0.01"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Type"; Value = "RSTD025"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "2M2"; VariantName = "[No Variations]"
+Added Component: Designator=R5(Resistances 1206)
+Add component (AddParameter): Name = "Manufacturer"; Value = "Panasonic"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer 1"; Value = "Panasonic"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number 1"; Value = "ERA-6AEB472V"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Part Number"; Value = "ERA6AEB472V"; VariantName = "[No Variations]"
+Added Component: Designator=R6(Resistances 1206)
+Add component (AddParameter): Name = "Manufacturer"; Value = "Panasonic"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer 1"; Value = "Panasonic"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number 1"; Value = "ERA-6AEB472V"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Part Number"; Value = "ERA6AEB472V"; VariantName = "[No Variations]"
+Added Component: Designator=R7(RTHT0250W)
+Add component (AddParameter): Name = "EMF_PN"; Value = "RMETAL0250W-26"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Power"; Value = "0.5W"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Stab(ppm)"; Value = "100"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Tol"; Value = "0.01"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Type"; Value = "RSTD025"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "10K"; VariantName = "[No Variations]"
+Added Component: Designator=R8(Resistances 1206)
+Add component (AddParameter): Name = "Manufacturer"; Value = "Panasonic"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer 1"; Value = "Panasonic"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number 1"; Value = "ERA-6AEB472V"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Part Number"; Value = "ERA6AEB472V"; VariantName = "[No Variations]"
+Added Component: Designator=R9(Resistances 1206)
+Add component (AddParameter): Name = "Manufacturer"; Value = "Panasonic"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer 1"; Value = "Panasonic"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number 1"; Value = "ERA-6AEB472V"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Part Number"; Value = "ERA6AEB472V"; VariantName = "[No Variations]"
+Added Component: Designator=R10(Resistances 1206)
+Add component (AddParameter): Name = "Manufacturer"; Value = "Panasonic"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer 1"; Value = "Panasonic"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number 1"; Value = "ERA-6AEB472V"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Part Number"; Value = "ERA6AEB472V"; VariantName = "[No Variations]"
+Added Component: Designator=R11(RTHT0250W)
+Add component (AddParameter): Name = "EMF_PN"; Value = "RMETAL0250W-32"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Power"; Value = "0.5W"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Stab(ppm)"; Value = "100"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Tol"; Value = "0.01"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Type"; Value = "RSTD025"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "33K"; VariantName = "[No Variations]"
+Added Component: Designator=R12(Resistances 1206)
+Add component (AddParameter): Name = "Manufacturer"; Value = "Panasonic"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer 1"; Value = "Panasonic"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number 1"; Value = "ERA-6AEB472V"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Part Number"; Value = "ERA6AEB472V"; VariantName = "[No Variations]"
+Added Component: Designator=R13(Resistances 1206)
+Add component (AddParameter): Name = "Manufacturer"; Value = "Panasonic"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer 1"; Value = "Panasonic"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number 1"; Value = "ERA-6AEB472V"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Part Number"; Value = "ERA6AEB472V"; VariantName = "[No Variations]"
+Added Component: Designator=R14(Resistances 1206)
+Add component (AddParameter): Name = "Manufacturer"; Value = "Panasonic"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer 1"; Value = "Panasonic"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number 1"; Value = "ERA-6AEB472V"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Part Number"; Value = "ERA6AEB472V"; VariantName = "[No Variations]"
+Added Component: Designator=R15(Resistances 1206)
+Add component (AddParameter): Name = "Manufacturer"; Value = "Panasonic"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer 1"; Value = "Panasonic"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number 1"; Value = "ERA-6AEB472V"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Part Number"; Value = "ERA6AEB472V"; VariantName = "[No Variations]"
+Added Component: Designator=R16(RTHT0250W)
+Add component (AddParameter): Name = "EMF_PN"; Value = "RMETAL0250W-26"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Power"; Value = "0.5W"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Stab(ppm)"; Value = "100"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Tol"; Value = "0.01"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Type"; Value = "RSTD025"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "10K"; VariantName = "[No Variations]"
+Added Component: Designator=R17(Resistances 1206)
+Add component (AddParameter): Name = "Manufacturer"; Value = "Panasonic"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer 1"; Value = "Panasonic"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number 1"; Value = "ERA-6AEB472V"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Part Number"; Value = "ERA6AEB472V"; VariantName = "[No Variations]"
+Added Component: Designator=S1(Slide Switches)
+Added Component: Designator=S2(Slide Switches)
+Added Component: Designator=X1(CT3151-0)
+Added Component: Designator=X2(CT3151-2)
+Added Component: Designator=X3(CT3151-4)
+Added Pin To Net: NetName=+5V Pin=C1-2
+Added Pin To Net: NetName=+5V Pin=C3-1
+Added Pin To Net: NetName=+5V Pin=C7-1
+Added Pin To Net: NetName=+5V Pin=C8-1
+Added Pin To Net: NetName=+5V Pin=C9-1
+Added Pin To Net: NetName=+5V Pin=C10-2
+Added Pin To Net: NetName=+5V Pin=K1-8
+Added Pin To Net: NetName=+5V Pin=K3-4
+Added Pin To Net: NetName=+5V Pin=K4-1
+Added Pin To Net: NetName=+5V Pin=Q1-2
+Added Pin To Net: NetName=+5V Pin=Q2-2
+Added Pin To Net: NetName=+5V Pin=R1-1
+Added Pin To Net: NetName=+5V Pin=R7-1
+Added Pin To Net: NetName=+5V Pin=X2-VCC
+Added Pin To Net: NetName=+5V Pin=X2-VCC
+Added Pin To Net: NetName=+5V Pin=X2-VCC
+Added Pin To Net: NetName=+5V Pin=X2-VCC
+Added Net: Name=+5V
+Added Pin To Net: NetName=-5V Pin=C5-1
+Added Pin To Net: NetName=-5V Pin=C6-1
+Added Pin To Net: NetName=-5V Pin=K1-4
+Added Pin To Net: NetName=-5V Pin=R5-1
+Added Pin To Net: NetName=-5V Pin=X3-VDD
+Added Pin To Net: NetName=-5V Pin=X3-VDD
+Added Pin To Net: NetName=-5V Pin=X3-VDD
+Added Pin To Net: NetName=-5V Pin=X3-VDD
+Added Net: Name=-5V
+Added Pin To Net: NetName=GND Pin=C1-1
+Added Pin To Net: NetName=GND Pin=C2-1
+Added Pin To Net: NetName=GND Pin=C3-2
+Added Pin To Net: NetName=GND Pin=C4-2
+Added Pin To Net: NetName=GND Pin=C5-2
+Added Pin To Net: NetName=GND Pin=C6-2
+Added Pin To Net: NetName=GND Pin=C7-2
+Added Pin To Net: NetName=GND Pin=C8-2
+Added Pin To Net: NetName=GND Pin=C9-2
+Added Pin To Net: NetName=GND Pin=C10-1
+Added Pin To Net: NetName=GND Pin=C11-1
+Added Pin To Net: NetName=GND Pin=K1-5
+Added Pin To Net: NetName=GND Pin=K3-8
+Added Pin To Net: NetName=GND Pin=K4-8
+Added Pin To Net: NetName=GND Pin=P1-2
+Added Pin To Net: NetName=GND Pin=R6-1
+Added Pin To Net: NetName=GND Pin=R13-1
+Added Pin To Net: NetName=GND Pin=R15-1
+Added Pin To Net: NetName=GND Pin=R16-2
+Added Pin To Net: NetName=GND Pin=S2-1
+Added Pin To Net: NetName=GND Pin=X1-GND
+Added Pin To Net: NetName=GND Pin=X1-GND
+Added Pin To Net: NetName=GND Pin=X1-GND
+Added Pin To Net: NetName=GND Pin=X1-GND
+Added Net: Name=GND
+Added Pin To Net: NetName=NetC2_2 Pin=C2-2
+Added Pin To Net: NetName=NetC2_2 Pin=C4-1
+Added Pin To Net: NetName=NetC2_2 Pin=R1-2
+Added Net: Name=NetC2_2
+Added Pin To Net: NetName=NetC11_2 Pin=C11-2
+Added Pin To Net: NetName=NetC11_2 Pin=R17-1
+Added Pin To Net: NetName=NetC11_2 Pin=S2-3
+Added Net: Name=NetC11_2
+Added Pin To Net: NetName=NetK1_1 Pin=K1-1
+Added Pin To Net: NetName=NetK1_1 Pin=R2-2
+Added Pin To Net: NetName=NetK1_1 Pin=R9-1
+Added Net: Name=NetK1_1
+Added Pin To Net: NetName=NetK1_2 Pin=K1-2
+Added Pin To Net: NetName=NetK1_2 Pin=R2-1
+Added Pin To Net: NetName=NetK1_2 Pin=R8-2
+Added Net: Name=NetK1_2
+Added Pin To Net: NetName=NetK1_3 Pin=K1-3
+Added Pin To Net: NetName=NetK1_3 Pin=R10-2
+Added Pin To Net: NetName=NetK1_3 Pin=R13-2
+Added Net: Name=NetK1_3
+Added Pin To Net: NetName=NetK1_6 Pin=K1-6
+Added Pin To Net: NetName=NetK1_6 Pin=R3-1
+Added Pin To Net: NetName=NetK1_6 Pin=R5-2
+Added Pin To Net: NetName=NetK1_6 Pin=R9-2
+Added Pin To Net: NetName=NetK1_6 Pin=R14-2
+Added Net: Name=NetK1_6
+Added Pin To Net: NetName=NetK1_7 Pin=K1-7
+Added Pin To Net: NetName=NetK1_7 Pin=R3-2
+Added Pin To Net: NetName=NetK1_7 Pin=R11-1
+Added Net: Name=NetK1_7
+Added Pin To Net: NetName=NetK3_1 Pin=K3-1
+Added Pin To Net: NetName=NetK3_1 Pin=R4-2
+Added Pin To Net: NetName=NetK3_1 Pin=R12-1
+Added Net: Name=NetK3_1
+Added Pin To Net: NetName=NetK3_2 Pin=K3-2
+Added Pin To Net: NetName=NetK3_2 Pin=R11-2
+Added Pin To Net: NetName=NetK3_2 Pin=S1-2
+Added Net: Name=NetK3_2
+Added Pin To Net: NetName=NetK3_3 Pin=K3-3
+Added Pin To Net: NetName=NetK3_3 Pin=R7-2
+Added Pin To Net: NetName=NetK3_3 Pin=R16-1
+Added Net: Name=NetK3_3
+Added Pin To Net: NetName=NetK4_7 Pin=K4-7
+Added Pin To Net: NetName=NetK4_7 Pin=R17-2
+Added Net: Name=NetK4_7
+Added Pin To Net: NetName=NetP1_1 Pin=P1-1
+Added Pin To Net: NetName=NetP1_1 Pin=R12-2
+Added Net: Name=NetP1_1
+Added Pin To Net: NetName=NetQ1_1 Pin=Q1-1
+Added Pin To Net: NetName=NetQ1_1 Pin=R6-2
+Added Pin To Net: NetName=NetQ1_1 Pin=R8-1
+Added Net: Name=NetQ1_1
+Added Pin To Net: NetName=NetQ2_1 Pin=Q2-1
+Added Pin To Net: NetName=NetQ2_1 Pin=R10-1
+Added Pin To Net: NetName=NetQ2_1 Pin=R15-2
+Added Net: Name=NetQ2_1
+Added Pin To Net: NetName=NetR4_1 Pin=R4-1
+Added Pin To Net: NetName=NetR4_1 Pin=S1-1
+Added Net: Name=NetR4_1
+Added Pin To Net: NetName=NetR14_1 Pin=R14-1
+Added Pin To Net: NetName=NetR14_1 Pin=S2-2
+Added Net: Name=NetR14_1
+Added Class: Name=carte_electronique_didactique_PittetL02_SCH
