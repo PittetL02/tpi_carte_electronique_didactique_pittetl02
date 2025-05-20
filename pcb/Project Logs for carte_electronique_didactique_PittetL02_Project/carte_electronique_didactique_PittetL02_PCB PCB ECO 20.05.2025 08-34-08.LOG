@@ -1,0 +1,8 @@
+Added Component: Designator=T1(troue de fixation)
+Added Component: Designator=T2(troue de fixation)
+Added Component: Designator=T3(troue de fixation)
+Added Component: Designator=T4(troue de fixation)
+Added Member To Class: ClassName=carte_electronique_didactique_PittetL02_SCH Member=Component T1 trou
+Added Member To Class: ClassName=carte_electronique_didactique_PittetL02_SCH Member=Component T2 trou
+Added Member To Class: ClassName=carte_electronique_didactique_PittetL02_SCH Member=Component T3 trou
+Added Member To Class: ClassName=carte_electronique_didactique_PittetL02_SCH Member=Component T4 trou
