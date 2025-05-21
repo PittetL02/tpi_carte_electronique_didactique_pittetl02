@@ -1,0 +1,26 @@
+Removed Pin From Net: NetName=GND Pin=R17-1
+Removed Pin From Net: NetName=+5V Pin=R17-2
+Removed Pin From Net: NetName=-5V Pin=R18-1
+Removed Pin From Net: NetName=GND Pin=R18-2
+Removed Member From Class: ClassName=carte_electronique_didactique_PittetL02_SCH Member=R17
+Removed Member From Class: ClassName=carte_electronique_didactique_PittetL02_SCH Member=R18
+Added Component: Designator=D1(DIOM5226X240N)
+Add component (AddParameter): Name = "Availability"; Value = "Unavailable"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MF"; Value = "{'manufacturer': u'Diodes Incorporated'}"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MP"; Value = "SMAZ5V6-13-F"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "None"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Price"; Value = "None"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Added Component: Designator=D2(DIOM5226X240N)
+Add component (AddParameter): Name = "Availability"; Value = "Unavailable"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MF"; Value = "{'manufacturer': u'Diodes Incorporated'}"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MP"; Value = "SMAZ5V6-13-F"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "None"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Price"; Value = "None"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Added Pin To Net: NetName=+5V Pin=D1-1
+Added Pin To Net: NetName=GND Pin=D1-2
+Added Pin To Net: NetName=GND Pin=D2-1
+Added Pin To Net: NetName=-5V Pin=D2-2
+Added Member To Class: ClassName=carte_electronique_didactique_PittetL02_SCH Member=Component D1 SMAZ5V6-13-F
+Added Member To Class: ClassName=carte_electronique_didactique_PittetL02_SCH Member=Component D2 SMAZ5V6-13-F

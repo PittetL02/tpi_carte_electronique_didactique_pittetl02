@@ -1,0 +1,20 @@
+Removed Pin From Net: NetName=GND Pin=C8-1
+Removed Pin From Net: NetName=+5V Pin=C8-2
+Removed Pin From Net: NetName=+5V Pin=C10-1
+Removed Pin From Net: NetName=GND Pin=C10-2
+Removed Member From Class: ClassName=carte_electronique_didactique_PittetL02_SCH Member=C8
+Removed Member From Class: ClassName=carte_electronique_didactique_PittetL02_SCH Member=C10
+Change Component Comment : Designator=C9 Old Comment=100nF New Comment=10uF
+Added Component: Designator=C3(C_0805 tantale)
+Added Component: Designator=C5(C_0805 ceramique)
+Added Component: Designator=R18(Diode Protection)
+Added Pin To Net: NetName=GND Pin=C3-1
+Added Pin To Net: NetName=GND Pin=C5-2
+Added Pin To Net: NetName=-5V Pin=R18-2
+Added Pin To Net: NetName=NetC3_2 Pin=C3-2
+Added Pin To Net: NetName=NetC3_2 Pin=C5-1
+Added Pin To Net: NetName=NetC3_2 Pin=R18-1
+Added Net: Name=NetC3_2
+Added Member To Class: ClassName=carte_electronique_didactique_PittetL02_SCH Member=Component C3 10uF
+Added Member To Class: ClassName=carte_electronique_didactique_PittetL02_SCH Member=Component C5 100nF
+Added Member To Class: ClassName=carte_electronique_didactique_PittetL02_SCH Member=Component R18 Diode

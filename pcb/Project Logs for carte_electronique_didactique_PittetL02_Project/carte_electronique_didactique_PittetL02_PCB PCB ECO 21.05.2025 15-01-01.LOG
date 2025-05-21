@@ -1,0 +1,38 @@
+Removed Pin From Net: NetName=NetK3_7 Pin=R16-2
+Change Component Comment : Designator=R14 Old Comment=2M2 New Comment=820k
+Added Component: Designator=R19(Resistances 1206)
+Add component (AddParameter): Name = "Manufacturer"; Value = "Panasonic"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer 1"; Value = "Panasonic"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number 1"; Value = "ERA-6AEB472V"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Part Number"; Value = "ERA6AEB472V"; VariantName = "[No Variations]"
+Added Component: Designator=X6(CONN_TC2030NL)
+Add component (AddParameter): Name = "EMF_PN"; Value = "CONN_TC2030"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Famille"; Value = "TAG-CONNECT"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer 1"; Value = "TAG-CONNECT"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number 1"; Value = "TC2030-IDC-NL"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Nb pins"; Value = "6"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pas (mm)"; Value = "1.27"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Type"; Value = "Smd\TAG"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "1x6"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=-5V Pin=C3-2
+Added Pin To Net: NetName=-5V Pin=C5-1
+Added Pin To Net: NetName=+5V Pin=C9-2
+Added Pin To Net: NetName=+5V Pin=C11-1
+Added Pin To Net: NetName=GND Pin=R17-2
+Added Pin To Net: NetName=GND Pin=R18-1
+Added Pin To Net: NetName=GND Pin=R19-1
+Added Pin To Net: NetName=NetC7_2 Pin=R19-2
+Added Pin To Net: NetName=+5V Pin=X6-2
+Added Pin To Net: NetName=GND Pin=X6-3
+Added Pin To Net: NetName=NetK3_7 Pin=X6-4
+Added Pin To Net: NetName=NetK3_2 Pin=K3-2
+Added Pin To Net: NetName=NetK3_2 Pin=R16-2
+Added Net: Name=NetK3_2
+Added Pin To Net: NetName=NetK3_4 Pin=K3-4
+Added Pin To Net: NetName=NetK3_4 Pin=X6-1
+Added Net: Name=NetK3_4
+Added Pin To Net: NetName=NetK3_6 Pin=K3-6
+Added Pin To Net: NetName=NetK3_6 Pin=X6-5
+Added Net: Name=NetK3_6
+Added Member To Class: ClassName=carte_electronique_didactique_PittetL02_SCH Member=Component R19 4.7k
+Added Member To Class: ClassName=carte_electronique_didactique_PittetL02_SCH Member=Component X6 1x6

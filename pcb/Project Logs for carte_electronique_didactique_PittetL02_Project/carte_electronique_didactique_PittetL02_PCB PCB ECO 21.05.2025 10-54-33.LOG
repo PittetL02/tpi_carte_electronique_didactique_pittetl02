@@ -1,0 +1,15 @@
+Removed Member From Class: ClassName=carte_electronique_didactique_PittetL02_SCH Member=T1
+Removed Member From Class: ClassName=carte_electronique_didactique_PittetL02_SCH Member=T2
+Removed Member From Class: ClassName=carte_electronique_didactique_PittetL02_SCH Member=T3
+Removed Member From Class: ClassName=carte_electronique_didactique_PittetL02_SCH Member=T4
+Added Component: Designator=TR1(trou)
+Added Component: Designator=TR2(trou)
+Added Component: Designator=TR3(trou)
+Added Component: Designator=TR4(trou)
+Change Net Name : Old Net Name=NetR1_1 New Net Name=NetR4_1
+Change Net Name : Old Net Name=NetR2_1 New Net Name=NetR1_1
+Added Member To Class: ClassName=carte_electronique_didactique_PittetL02_SCH Member=Component R4 2M2
+Added Member To Class: ClassName=carte_electronique_didactique_PittetL02_SCH Member=Component TR1 trou
+Added Member To Class: ClassName=carte_electronique_didactique_PittetL02_SCH Member=Component TR2 trou
+Added Member To Class: ClassName=carte_electronique_didactique_PittetL02_SCH Member=Component TR3 trou
+Added Member To Class: ClassName=carte_electronique_didactique_PittetL02_SCH Member=Component TR4 trou
