@@ -1,0 +1,464 @@
+var rechercheAvanceCtrl = (function () {
+
+    /**
+     * ...
+     * @returns {undefined}
+     */
+    function _initPageRechercheAvance() {
+        _loadSections();
+        _loadTypes();
+        if (sessionStorage.getItem("filtreRechercheAvancee") !== null) {
+            var json = sessionStorage.getItem("filtreRechercheAvancee");
+            var parsJson = JSON.parse(json);
+            if (parsJson["TexteArticle"] !== "") {
+                $("#rechercheArticle").val(parsJson["TexteArticle"]);
+            }
+            if (parsJson["TexteCommande"] !== "") {
+                $("#rechercheCommande").val(parsJson["TexteCommande"]);
+            }
+            if (parsJson["DateDebut"] !== "") {
+                var jsonDate = parsJson["DateDebut"];
+                var date = jsonDate.split(".");
+                $("#dateDebut").datepicker("setDate", new Date(parseInt(date[0]), parseInt(date[1]) - 1, parseInt(date[2])));
+            }
+            if (parsJson["DateFin"] !== "") {
+                var jsonDate = parsJson["DateFin"];
+                var date = jsonDate.split(".");
+                $("#dateFin").datepicker("setDate", new Date(parseInt(date[0]), parseInt(date[1]) - 1, parseInt(date[2])));
+            }
+        }
+    }
+
+    /**
+     * loadSections charge la totalité des sections pour
+     * charger la combobox dédiée lors du chargement de la page
+     * @returns void
+     */
+    function _loadSections() {
+        if (!sessionManager.isLogged()) {
+            swal({
+                title: "Erreur de connexion",
+                text: "Vous devez être connecté pour accéder à cette page.",
+                timer: 2000,
+                type: "error"
+            }, function () {
+                appelsServeurWrk.redirectToLogin();
+            });
+        } else {
+            if(sessionManager.getFK_Section() != null){
+                if (sessionManager.isProf() || sessionManager.isEleve()) {
+                    $("select[name='cmbSection']").append("<option value='" + sessionManager.getFK_Section() + "'>" + sessionManager.getSection() + "</option>");
+                    $("select[name='cmbSection']").selectpicker('refresh');
+                    $("select[name='cmbSection']").selectpicker("val", sessionManager.getFK_Section());
+                    if (sessionStorage.getItem("filtreRechercheAvancee") !== null) {
+                        var json = sessionStorage.getItem("filtreRechercheAvancee");
+                        var parsJson = JSON.parse(json);
+                        if (parsJson["FK_Section"] !== "-1") {
+                            $("select[name='cmbSection']").selectpicker("val", parsJson["FK_Section"]);
+                        } else {
+                            $("select[name='cmbSection']").selectpicker("val", sessionManager.getFK_Section());
+                        }
+                    }
+                    _changeSection();
+                } else {
+                    appelsServeurWrk.getSections(_loadSectionsSuccess, _loadSectionsError);
+                }
+            }else{
+                location.href = '../Administration/addSection.html';
+            }
+        }
+    }
+
+    /**
+     * loadSectionsSuccess permet de vérifier ...
+     * @param data la pk de la section selectionnée
+     * @returns void
+     */
+    function _loadSectionsSuccess(data) {
+        console.log(data);
+        if (data['result'] === "1") {
+            var isFirst = true;
+            var fk_section = -1;
+            $(data["body"]).each(function (index, element) {
+                $("select[name='cmbSection']").append("<option value='" + element["PK_Section"] + "'>" + element["Nom"] + "</option>");
+                $("select[name='cmbSection']").selectpicker('refresh');
+                if (isFirst) {
+                    fk_section = element["PK_Section"];
+                    isFirst = false;
+                }
+            });
+            $("select[name='cmbSection']").selectpicker("val", fk_section);
+            if (sessionStorage.getItem("filtreRechercheAvancee") !== null) {
+                var json = sessionStorage.getItem("filtreRechercheAvancee");
+                var parsJson = JSON.parse(json);
+                if (parsJson["FK_Section"] !== "-1") {
+                    $("select[name='cmbSection']").selectpicker("val", parsJson["FK_Section"]);
+                }
+            }
+            rechercheAvanceCtrl.changeSection();
+        } else if (data['result'] === "-3") {
+            appelsServeurWrk.redirectToLogin();
+        } else {
+            swal({
+                title: "Erreur",
+                text: data['message'],
+                type: "error"
+            });
+        }
+    }
+
+    function _loadSectionsError(request, status, err) {
+        console.log(request);
+        console.log(status);
+        console.log(err);
+        // En cas de timeout :
+        if (status == "timeout") {
+            swal({
+                title: "Erreur",
+                text: "timeout",
+                type: "error"
+            });
+        } else {
+            swal({
+                title: "Erreur",
+                text: "Erreur lors du chargement des sections",
+                //data['message'],
+                type: "error"
+            });
+        }
+    }
+
+    /**
+     * changeSection permet de recharger les fournisseurs et utilisateurs
+     * propres à la nouvelle section sélectionnée
+     * @returns void
+     */
+    function _changeSection() {
+//        $("select[name='cmbSectionAddFournisseur']").selectpicker("val", $("select[name='cmbSection']").val());
+        _loadFournisseurs();
+        _loadUtilisateurs();
+    }
+
+    /**
+     * loadFournisseurs charge la totalité des fournisseurs pour
+     * charger la combobox dédiée lors du chargement de la page
+     * @returns void
+     */
+    function _loadFournisseurs() {
+        $("select[name='cmbFournisseur']").empty();
+        var pkSection = $("select[name='cmbSection']").val();
+        var withInactif = "true";
+        appelsServeurWrk.getFournisseurBySectionCom(pkSection, withInactif, _loadFournisseursSuccess, _loadFournisseursError);
+    }
+
+    function _loadFournisseursSuccess(data) {
+        console.log(data);
+        if (data['result'] == "1") {
+            $("select[name='cmbFournisseur']").append("<option value='-1'>TOUS LES FOURNISSEURS</option>");
+            $("select[name='cmbFournisseur']").selectpicker('refresh');
+            $(data["body"]).each(function (index, element) {
+                var paysEtranger = "";
+
+                //Variable qui stocke la valeur de l'attribut Actif
+                var isActif = element["Actif"];
+
+                //Variable qui va stocker le css au format texte pour la modification de la couleur d'arrière-plan
+                var bgColor = "";
+
+                //Si le fournisseur n'est pas actif alors on définit la couleur de l'arrière-plan en gris pour les identifier
+                if (isActif == "0")
+                {
+                    bgColor = "style=\"background-color: LightGray\"";
+                }
+                
+                if (element["FK_Pays"] !== "CH") {
+                    paysEtranger = " [" + element["NomPays"] + "]";
+                }
+
+                //On ajoute notre attribut qui définit la couleur d'arrière-plan $ notre élément
+                $("select[name='cmbFournisseur']").append("<option value='" + element["PK_Fournisseur"] + "' " + bgColor + ">" + element["Nom"] + paysEtranger + "</option>");
+                $("select[name='cmbFournisseur']").selectpicker('refresh');
+            });
+            if (sessionStorage.getItem("filtreRechercheAvancee") !== null) {
+                var json = sessionStorage.getItem("filtreRechercheAvancee");
+                var parsJson = JSON.parse(json);
+                $("select[name='cmbFournisseur']").selectpicker("val", parsJson["FK_Fournisseur"]);
+            }
+        } else {
+            swal({
+                title: "Erreur",
+                text: data['message'],
+                type: "error"
+            });
+        }
+    }
+
+    function _loadFournisseursError(request, status, err) {
+        if (status === "timeout") {
+            swal({
+                title: "Erreur",
+                text: "timeout",
+                type: "error"
+            });
+        } else {
+            swal({
+                title: "Erreur",
+                text: /*"Erreur lors du chargement des fournisseurs"*/ err,
+                //data['message'],
+                type: "error"
+            });
+        }
+    }
+
+    /**
+     * loadUtilisateurs charge la totalité des utilisateurs pour
+     * charger la combobox dédiée lors du chargement de la page
+     * @returns void
+     */
+    function _loadUtilisateurs() {
+        $("select[name='cmbUtilisateur']").empty();
+        var pkSection = $("select[name='cmbSection']").val();
+        var withInactifs = "false";
+        appelsServeurWrk.getUtilisateursBySection(pkSection, withInactifs,true, _loadUtilisateursSuccess, _loadUtilisateursError);
+    }
+
+    function _loadUtilisateursSuccess(data) {
+        if (data['result'] === "1") {
+            $("select[name='cmbUtilisateur']").append("<option value='-1'>TOUS LES UTILISATEURS</option>");
+            $("select[name='cmbUtilisateur']").selectpicker('refresh');
+            $(data["body"]).each(function (index, element) {
+                $("select[name='cmbUtilisateur']").append("<option value='" + element["PK_Utilisateur"] + "'>" + element["Nom"] + " " + element["Prenom"] + "</option>");
+                $("select[name='cmbUtilisateur']").selectpicker('refresh');
+            });
+            if (sessionStorage.getItem("filtreRechercheAvancee") !== null) {
+                var json = sessionStorage.getItem("filtreRechercheAvancee");
+                var parsJson = JSON.parse(json);
+                $("select[name='cmbUtilisateur']").selectpicker("val", parsJson["FK_Utilisateur"]);
+            }
+        } else {
+            swal({
+                title: "Erreur",
+                text: data['message'],
+                type: "error"
+            });
+        }
+    }
+
+    function _loadUtilisateursError(request, status, err) {
+        if (status === "timeout") {
+            swal({
+                title: "Erreur",
+                text: "timeout",
+                type: "error"
+            });
+        } else {
+            swal({
+                title: "Erreur",
+                text: "Erreur lors du chargement des utilisateurs",
+                //data['message'],
+                type: "error"
+            });
+        }
+    }
+
+    /**
+     * loadTypes charge la totalité des types pour charger la combobox dédiée 
+     * lors du chargement de la page.
+     * @returns void
+     */
+    function _loadTypes() {
+        //$("select[name='cmbType']").empty();
+        $("select[name='cmbType']").append("<option value='-1'>TOUS LES TYPES</option>");
+        $("select[name='cmbType']").selectpicker('refresh');
+        appelsServeurWrk.getTypeCmd(_loadTypesSuccess, _loadTypesError);
+    }
+
+    function _loadTypesSuccess(data) {
+        if (data['result'] === "1") {
+            $(data["body"]).each(function (index, element) {
+                $("select[name='cmbType']").append("<option value='" + element["PK_TypeCommande"] + "'>" + element["Type"] + "</option>");
+                $("select[name='cmbType']").selectpicker('refresh');
+            });
+            if (sessionStorage.getItem("filtreRechercheAvancee") !== null) {
+                var json = sessionStorage.getItem("filtreRechercheAvancee");
+                var parsJson = JSON.parse(json);
+                $("select[name='cmbType']").selectpicker("val", parsJson["FK_Type"]);
+            }
+        } else {
+            swal({
+                title: "Erreur",
+                text: data['message'],
+                type: "error"
+            });
+        }
+    }
+
+    function _loadTypesError(request, status, err) {
+        if (status === "timeout") {
+            swal({
+                title: "Erreur",
+                text: "timeout",
+                type: "error"
+            });
+        } else {
+            swal({
+                title: "Erreur",
+                text: "Erreur lors du chargement des utilisateurs",
+                //data['message'],
+                type: "error"
+            });
+        }
+    }
+
+    /**
+     * Cette méhtode permet simplement d'inverser le format des dates afin qu'il
+     * soit cohérant pour l'afficher dans le résumé du filtre. (De base les 
+     * dates sont stockées au format [année].[mois].[jour], or nous trouvons
+     * qu'il est plus lisible de les lire avec le format [jour].[mois].[année].
+     * @param date la date à modifier
+     * @returns la date dans son bon format.
+     */
+    function _inverseDate(date) {
+        var parts = date.split(".");
+        return parts[2] + "." + parts[1] + "." + parts[0];
+    }
+
+    /**
+     * Cette méhtode permet de vérifier que les dates définies sur la page 
+     * rechecheAvancee.html. Les dates sont cohérentes dans tous les cas, sauf
+     * si la date de fin est antérieur à celle du début.
+     * @returns false si la date de fin est antérieur à celle du début, true 
+     * dans tous les autres cas.
+     */
+    function _checkDate() {
+        var res = true;
+        var valDateDebut = $('#dateDebut').val();
+        var valDateFin = $('#dateFin').val();
+        var valDateDebutDATE = null;
+        var valDateFINDATE = null;
+        var parts = valDateDebut.split(".");
+        var partsF = valDateFin.split(".");
+        if (valDateDebut !== "") {
+            var valDateDebutDATE = _inverseDate(valDateDebut);
+            var valDateDebutDATE = new Date(parseInt(parts[2]), parseInt(parts[1]) - 1, parseInt(parts[0]));
+        }
+        if (valDateFin !== "") {
+            var valDateFINDATE = new Date(parseInt(partsF[2]), parseInt(partsF[1]) - 1, parseInt(partsF[0]));
+        }
+        if (valDateDebutDATE !== null && valDateFINDATE !== null) {
+            if (valDateDebutDATE > valDateFINDATE) {
+                res = false;
+            } else {
+                $('#dateDebut').val(parts[2] + "." + parts[1] + "." + parts[0]);
+                $('#dateFin').val(partsF[2] + "." + partsF[1] + "." + partsF[0]);
+            }
+        } else {
+            if (valDateFINDATE !== null) {
+                $('#dateFin').val(partsF[2] + "." + partsF[1] + "." + partsF[0]);
+            } else {
+                if (valDateDebutDATE !== null) {
+                    $('#dateDebut').val(parts[2] + "." + parts[1] + "." + parts[0]);
+                }
+            }
+        }
+        return res;
+    }
+
+    /**
+     * Cette méthode permet de créer un String dans lequel on stocke toutes les 
+     * valeurs des paramètres définis sur la page rechercheAvancee.html. Par la
+     * suite, on utilisera ce filtre pour afficher un résumé du filtre sur la 
+     * page commandes.html.
+     * @returns filter le filtre contenant le champs choisis au formats text.
+     */
+    function _createFilterTexte() {
+        var filter = "";
+        filter += "Section: " + $("#cmbSection option:selected").text();
+        if ($("select[name='cmbType']").val() !== "") {
+            filter += " | Type: " + $("#cmbType option:selected").text();
+        }
+        if ($("select[name='cmbUtilisateur']").val() !== "") {
+            filter += " | Utilisateur: " + $("#cmbUtilisateur option:selected").text();
+        }
+        if ($("select[name='cmbFournisseur']").val() !== "") {
+            filter += " | Fournisseur: " + $("#cmbFournisseur option:selected").text();
+        }
+        if ($('#dateDebut').val() !== "") {
+            filter += " | du " + _inverseDate($('#dateDebut').val());
+        }
+        if ($('#dateFin').val() !== "") {
+            filter += " | au " + _inverseDate($('#dateFin').val());
+        }
+        if ($('#rechercheCommande').val() !== "") {
+            filter += "  | commandes qui contiennent: \"" + $('#rechercheCommande').val() + "\"";
+        }
+        if ($('#rechercheArticle').val() !== "") {
+            filter += " | articles qui contiennent: \"" + $('#rechercheArticle').val() + "\"";
+        }
+        return filter;
+    }
+
+    /**
+     * Cette méthode permet de créer un JSON en fonction des paramètres choisis
+     * sur la page rechercheAvancee.html. Pour se faire, on check si les valeurs
+     * sont bien existantes avant de les ajouter à notre JSON.
+     * @returns jsonobj le JSON contenant tous les attributs du filtre de la 
+     * recherche avancée.
+     */
+    function _createJson() {
+        var jsonobj = new Object;
+        var fkType = -1;
+        if ($("select[name='cmbType']").val() !== "") {
+            fkType = $("select[name='cmbType']").val();
+        }
+        jsonobj.FK_Type = fkType;
+        jsonobj.FK_Section = $("select[name='cmbSection']").val();
+        var fkUtilisateur = -1;
+        if ($("select[name='cmbUtilisateur']").val() !== "") {
+            fkUtilisateur = $("select[name='cmbUtilisateur']").val();
+        }
+        jsonobj.FK_Utilisateur = fkUtilisateur;
+        var fkFournisseur = -1;
+        if ($("select[name='cmbFournisseur']").val() !== "") {
+            fkFournisseur = $("select[name='cmbFournisseur']").val();
+        }
+        jsonobj.FK_Fournisseur = fkFournisseur;
+        jsonobj.DateDebut = $('#dateDebut').val();
+        jsonobj.DateFin = $('#dateFin').val();
+        jsonobj.TexteCommande = $('#rechercheCommande').val();
+        jsonobj.TexteArticle = $('#rechercheArticle').val();
+        jsonobj.CommandesTerminees = "" + $('#commandesTerminees').is(":checked");
+        return jsonobj;
+    }
+
+    /**
+     * La méthode search permet d'initier les valeur des filtres de la recherche
+     * avancée en fonction de leur valeurs, tant que les dates ne sont pas
+     * incohérentes. Puis, elle nous redirige automatiquement sur la page
+     * commande.html.
+     * @returns void
+     */
+    function _search() {
+        var isOk = _checkDate();
+        if (!isOk) {
+            swal({
+                title: "Erreur",
+                text: "Dates incohérentes",
+                type: "error"
+            });
+        } else {
+            var JSONObj = _createJson();
+            var filterTexte = _createFilterTexte();
+            sessionStorage.setItem("filtreRechercheAvancee", JSON.stringify(JSONObj));
+            sessionStorage.setItem("filtreTexte", filterTexte);
+//            _createBtnCleanJSON();
+            window.location.href = "commandes.html";
+        }
+    }
+
+    return {
+        initPageRechercheAvance: _initPageRechercheAvance,
+        changeSection: _changeSection,
+        search: _search
+    };
+})();

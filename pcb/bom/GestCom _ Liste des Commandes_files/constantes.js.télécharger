@@ -1,0 +1,87 @@
+var constantes = (function () {
+    var URL_GESTCOM_MAIN = "https://gestcom.emf-infopro.ch/serveur/main.php";
+    var URL_GESTCOM_EXPORTPDF = "https://gestcom.emf-infopro.ch/serveur/exportPDF.php";
+	var URL_GESTCOM_EXPORTCSV = "https://gestcom.emf-infopro.ch/serveur/exportCommandesCSV.php";
+	var URL_GESTCOM_EXPORTFOURNISSEURCSV = "https://gestcom.emf-infopro.ch/serveur/exportFournisseurCSV.php";
+	
+	var URL_GESTCOM_STOCKEMFLOADER = "https://gestcom.emf-infopro.ch/serveur/stockFileUploader.php";
+	var URL_LINK_STOCKEMF = "https://gestcom.emf-infopro.ch/STOCK_EMF/ETAT_STOCK_EMF.xlsx";
+	var PREFIXES_PROJET = ["EMEF-AUTO-","EMEF-POLY-","EMEF-ELEC-","EMEF-INFO-","EMEF-COM1-","EMEF-MP-","EMEF-MASCO-", "EMEF-COM-ANNIV130-"];
+	var NOM_STOCK_EMF = "STOCK EMF";
+	var PREFIXE_EMEF = "EMEF-";
+	
+    var SUFFIXE_EMAIL = "@edufr.ch";
+	var URL_GESTCOM_PDFUPLOADER = "https://gestcom.emf-infopro.ch/serveur/pdfUploader.php";
+	var LIMIT_PDF_SIZE = 3145728;
+	
+	var URL_GESTCOM = "https://gestcom.emf-infopro.ch/";
+	
+	var UPDATECMD_CELL_VALUE = 8;
+
+    function _URL_GESTCOM_MAIN() {
+        return URL_GESTCOM_MAIN;
+    }
+
+    function _URL_GESTCOM_EXPORTFOURNISSEURCSV() {
+        return URL_GESTCOM_EXPORTFOURNISSEURCSV;
+    }
+
+
+    function _URL_GESTCOM_EXPORTPDF() {
+        return URL_GESTCOM_EXPORTPDF;
+    }
+
+    function _URL_GESTCOM_EXPORTCSV() {
+        return URL_GESTCOM_EXPORTCSV;
+    }
+
+    function _SUFFIXE_EMAIL() {
+        return SUFFIXE_EMAIL;
+    }
+	
+	function _URL_GESTCOM_PDFUPLOADER() {
+        return URL_GESTCOM_PDFUPLOADER;
+	}
+	
+	function _LIMIT_PDF_SIZE(){
+        return LIMIT_PDF_SIZE;
+    }
+
+	function _URL_GESTCOM_STOCKEMFLOADER() {
+		return URL_GESTCOM_STOCKEMFLOADER;
+	}
+	function _URL_LINK_STOCKEMF() {
+		return URL_LINK_STOCKEMF;
+	}
+	function _PREFIXES_PROJET(){
+		return PREFIXES_PROJET;
+	}
+	function _NOM_STOCK_EMF(){
+			return NOM_STOCK_EMF;
+	}
+	function _PREFIXE_EMEF(){
+			return PREFIXE_EMEF;
+	}
+	function _URL_GESTCOM(){
+    		return URL_GESTCOM;
+	}
+	function _UPDATECMD_CELL_VALUE(){
+		return UPDATECMD_CELL_VALUE;
+	}
+	return {
+		URL_GESTCOM_MAIN: _URL_GESTCOM_MAIN,
+		URL_GESTCOM_PDFUPLOADER: _URL_GESTCOM_PDFUPLOADER,
+		URL_GESTCOM_EXPORTPDF: _URL_GESTCOM_EXPORTPDF,
+		URL_GESTCOM_EXPORTCSV: _URL_GESTCOM_EXPORTCSV,
+		URL_GESTCOM_EXPORTFOURNISSEURCSV: _URL_GESTCOM_EXPORTFOURNISSEURCSV,
+		URL_LINK_STOCKEMF: _URL_LINK_STOCKEMF,
+		SUFFIXE_EMAIL: _SUFFIXE_EMAIL,
+		LIMIT_PDF_SIZE: _LIMIT_PDF_SIZE,
+		URL_GESTCOM_STOCKEMFLOADER: _URL_GESTCOM_STOCKEMFLOADER,
+		PREFIXES_PROJET: _PREFIXES_PROJET,
+		NOM_STOCK_EMF: _NOM_STOCK_EMF,
+		PREFIXE_EMEF: _PREFIXE_EMEF,
+		URL_GESTCOM: _URL_GESTCOM,
+		UPDATECMD_CELL_VALUE: _UPDATECMD_CELL_VALUE
+	};
+})();

@@ -1,0 +1,279 @@
+var commandesCtrl = (function () {
+    function _initPage() {
+        if (!sessionManager.isLogged()) {
+            swal({
+                title: "Erreur de connexion",
+                text: "Vous devez être connecté pour accéder à cette page.",
+                timer: 2000,
+                type: "error"
+            }, function () {
+                appelsServeurWrk.redirectToLogin();
+            });
+        } else {
+            if(sessionManager.getFK_Section() != null){
+                laTable = $('#table_lstCommandes').DataTable({
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'copy', 'csv', 'excel', 'pdf', 'print'
+                    ],
+                    aoColumns: [
+                        {sWidth: "10%"}, {sWidth: "0%"}, {sWidth: "0%"}, {sWidth: "0%", sClass: "commandeTabAlignRight"}, {sWidth: "0%", sClass: "commandeTabAlignRight"}, {sWidth: "20%"}, {sWidth: "25%"}, {sWidth: "0%", sClass: "commandeTabAlignRight"}, {sWidth: "15%"}
+                    ],
+                    "order": [[0, "desc"]]
+                });
+                if (sessionStorage.getItem("filtreRechercheAvancee") && JSON.parse(sessionStorage.getItem("filtreRechercheAvancee"))["CommandesTerminees"] == "true") {
+                    $("#lstCommande-cbx-terminees").attr("checked", "");
+                }
+                if(!sessionManager.isAtLeastMag()){
+                    $("#commandesEnPreparation").hide();
+                }
+                _getLstCommandeDefault();
+                _isFilterOn();
+            }else{
+                location.href = '../Administration/addSection.html';
+            }
+        }
+    }
+
+    /**
+     * Cette méthode permet d'afficher le résumé du filtre ainsi que le bouton
+     * utilisé pour supprimer le filtre contenu dans le session storage dans le 
+     * cas ou il y a un filtre qui est actif.
+     * @returns void
+     */
+    function _isFilterOn() {
+        if (sessionStorage.getItem("filtreTexte") !== null) {
+            document.getElementById('lienTest').innerHTML = sessionStorage.getItem("filtreTexte");
+            document.getElementById('butDeleteFiltre').innerHTML = "<button id=\"btnCleanFiltreRecherche\" type=\"button\" class=\"btn waves-effect\" onclick=\"javascript:commandesCtrl.clearSessionStorage();\" style=\"background-color:#DD6B55; color: white\">X</button>";
+        }
+    }
+
+    /**
+     * Cette méthode permet de cleaner le contenu du session storage et nous
+     * redirige vers la page commandes.html.
+     * @returns void
+     */
+    function _clearSessionStorage() {
+        sessionStorage.removeItem("filtreRechercheAvancee");
+        sessionStorage.removeItem("filtreTexte");
+        window.location.href = "commandes.html";
+    }
+
+    /**
+     * Cette fonction va rechercher la liste de toutes les commandes présente dans la BD
+     * et elle l'affiche dans la datatable de la page de la liste des commandes.
+     * @returns void
+     */
+    function _getLstCommandeDefault() {
+        // mettre la page "Chargement"
+      //  $('.page-loader-wrapper').fadeIn();
+        var laTable = $('#table_lstCommandes').DataTable();
+        laTable.page.len(-1);
+        laTable.clear();
+        var filtreRechercheAvancee = sessionStorage.getItem("filtreRechercheAvancee");
+        if (filtreRechercheAvancee) {
+            console.log("Le chargement de la page s'effectue en fonction de la recherche avancée.");
+            // todo: le rendre read-only également
+            appelsServeurWrk.searchCommands(jQuery.parseJSON(filtreRechercheAvancee), _getLstCommandeDefaultSuccess, _getLstCommandeDefaultError);
+        } else {
+            console.log("Le chargement de la page charge toutes les commandes étant donné qu'il n'y pas de filtre appliqué.");
+            var enPreparation = "" + $("#lstCommande-cbx-preparation")[0].checked;
+            appelsServeurWrk.getCommandes(enPreparation, _getLstCommandeDefaultSuccess, _getLstCommandeDefaultError);
+        }
+    }
+
+    function _getLstCommandeDefaultSuccess(data) {
+        console.log(data);
+        if (data['result'] == "1") {
+            var body = data['body'];
+
+            //Création du tableau de PK pour la navigation
+            var PKArray = [];
+            // Création de la variable d'index pour la navigation
+            var index = -1;
+
+            console.log(body.length);
+            console.log(data.body.PK_Commande)
+            for (var i = 0; i < body.length; i++) {
+                if (body[i]["PK_Commande"] != null) {
+                    var ligne = laTable.row.add([body[i]["PK_Commande"], body[i]["Type"], body[i]["Section"],
+                        body[i]["DateCreation"], body[i]["LivSouhaitee"], body[i]["Fournisseur"], body[i]["NomUtilisateur"] + " " + body[i]["PrenomUtilisateur"],
+                        body[i]["SommeTotaleCHF"], body[i]["StatutCommande"]]).draw();
+                }
+
+                console.log("Status : " + body[i]["StatutCommande"]);
+                
+                //Ajout de toutes les PKs dans le tableau pour la navigation
+                PKArray[i] = body[i]["PK_Commande"];
+                //Stockage de l'index pour la navigation
+                index = i;
+
+                var laligne = ligne.nodes().to$(); 
+                laligne.addClass("newLigne");
+                //passage de l'index en paramètre lors de l'appel de la méthode "getCommandeDetails()"
+                laligne.attr("onclick", "javascript:commandesCtrl.getCommandeDetails(null, this, null, " + index + ")");
+                switch (body[i]["FK_StatutCommande"]) {
+                    case "1":
+                        $(".newLigne").css("background-color", "#FD848A");
+                        break;
+                    case "2":
+                        $(".newLigne").css("background-color", "#84C7DD");
+                        break;
+                    case "3":
+                        $(".newLigne").css("background-color", "#FFF873");
+                        break;
+                    case "4":
+                        $(".newLigne").find('td').eq(8).attr("title", body[i]["StatutLivraison"] + " | " + body[i]["StatutFacturation"]);
+                        if (body[i]["FK_StatutLivraison"] === "3") {
+                            $(".newLigne").css("background-color", "#DBB3E2");
+                        } else {
+                            $(".newLigne").css("background-color", "#FFCE85");
+                        }
+                        break;
+                    case "5":
+                        $(".newLigne").css("background-color", "#91F07D");
+                        break;
+                }
+                $(".newLigne").removeClass("newLigne");
+            }
+            //Création d'une variable de session contenant le tableau de PKs pour la navigation
+            sessionStorage.setItem("PKArray",  JSON.stringify(PKArray));
+
+
+            var statutCmd = sessionStorage.getItem("statutCommande");
+            if (statutCmd) {
+                laTable.search(statutCmd).draw;
+            }
+            sessionStorage.removeItem("statutCommande");
+
+            laTable.page.len(10).draw();
+            $('.page-loader-wrapper').fadeOut();
+        } else if (data['result'] == "-3") {
+            swal({
+                title: "Erreur de connexion",
+                text: "Vous devez être connecté pour accéder à cette page.",
+                type: "error"
+            }, function () {
+                appelsServeurWrk.redirectToLogin();
+            });
+        }
+
+    }
+
+    function _getLstCommandeDefaultError(request, status, err) {
+        console.log(arguments);
+        swal({
+            title: "Erreur",
+            text: (status === "timeout") ? "timeout" : "Une erreur est survenue lors du chargement des commandes",
+            type: "error"
+        });
+    }
+
+    /**
+     * Cette fonction va rechercher les informations de la commande sur laquelle
+     * l'utilisateur aura cliqué dans la liste des commandes. Elle stocke ces informations
+     * dans le session storage et affiche la page de la commande.
+     *
+     * @param {int} pkCommande - la PK de la commande à get en détails.
+     * @param {html} ligneCliquee - La ligne sur laquelle l'utilisateur a cliqué
+     * @param {html} callback - fonction lancée quand la commande a été get
+     */
+    function _getCommandeDetails(pkCommande, ligneCliquee, callback, index) {
+
+
+        $("#lstCommande-cbx-preparation").prop("checked", false);
+
+        var laTable = $('#table_lstCommandes').DataTable();
+
+        //Création d'un tableau des positions dans la datatable et d'une variable d'index
+        let sortedIndex = [];
+        let i = 0;
+
+        console.log("Cliqué sur " + index);
+        //Création d'une variable qui stocke la position dans la datatable
+        let indexCliqued = -1;
+        //Création d'une boucle qui va parcourir toute la datatable pour retourner la position de la ligne cliquée
+        laTable.rows({filter: 'applied'}).every( function ( rowIdx, tableLoop, rowLoop ) {
+            if (rowIdx == index)
+            {
+                //Stocke dans la variable 
+                indexCliqued =  rowLoop;
+            }
+            // remplir une liste des SortedIndex (les index triés comme dans la dataTable)
+            sortedIndex[i] = rowIdx;
+            i++;
+        } );
+
+        // stocker SortedIndex dans sessionStorage
+        sessionStorage.setItem("sortedIndex", JSON.stringify(sortedIndex));
+        // stocker indexCliqued dans sessionStorage
+        sessionStorage.setItem("position", indexCliqued);
+
+        //Si la variable qui contiendra la pk est bien vide, on la remplit 
+        if (pkCommande === null) {
+            pkCommande = $(ligneCliquee).children().first().text();
+        }
+        //On stocke les différentes variable dans la sessionstorage
+        sessionStorage.setItem("indexCourant", JSON.stringify(index));
+        sessionStorage.setItem("currentPK", pkCommande);
+
+        //On se déplace ensuite vers la page d'une commande spécifique
+        window.location.href = "uneCommande.html";
+    }
+
+    function _changeFilter() {
+        if (sessionStorage.getItem("filtreRechercheAvancee")) {
+            var json = JSON.parse(sessionStorage.getItem("filtreRechercheAvancee"));
+            json["CommandesTerminees"] = "" + $('#lstCommande-cbx-terminees').is(':checked');
+            sessionStorage.setItem("filtreRechercheAvancee", JSON.stringify(json));
+        }
+        _getLstCommandeDefault();
+    }
+
+    /**
+     Cette fonction est appelée lorsque le bouton d'export CSV est cliqué.
+     Elle va utiliser le tableau de PK et de sortedIndex pour créer un 
+     tableau de PK dans l'ordre de tri du Datatable et effectuer un appel serveur
+     avec ce tableau
+     */
+    function _exportCSV() {
+        $("#lstCommande-cbx-preparation").prop("checked", false);
+
+        var laTable = $('#table_lstCommandes').DataTable();
+
+        //Création d'un tableau des positions dans la datatable et d'une variable d'index
+        let PKArraySorted = [];
+        let i = 0;
+
+        //Récupération de la liste de PK
+        let pkArray = JSON.parse(sessionStorage.getItem("PKArray")).map(pk => parseInt(pk));
+
+        //Création d'une boucle qui va parcourir toute la datatable pour sortir les index de PK dans l'ordre de tri
+        laTable.rows({filter: 'applied'}).every( function ( rowIdx ) {
+            // remplir une liste des PK (les index triés comme dans la dataTable)
+            PKArraySorted[i] = pkArray[rowIdx];
+            i++;
+        } );
+
+        //Test pour voir si les PKs sont bien retournées dans l'ordre de tri
+        /*PKArraySorted.forEach(array => {
+            console.log("PK :" + array);
+        });*/
+
+        //Appel serveur avec le tableau en paramètre
+        window.open(constantes.URL_GESTCOM_EXPORTCSV() + '?PKArraySorted=' + PKArraySorted);
+        /*
+        Avec l'attribut '_blank' à la fin:
+        window.open(constantes.URL_GESTCOM_EXPORTPDF() + '?PKArraySorted=' + PKArraySorted, '_blank');
+        */
+    }
+
+    return {
+        initPage: _initPage,
+        getLstCommandeDefault: _getLstCommandeDefault,
+        getCommandeDetails: _getCommandeDetails,
+        exportCSV: _exportCSV,
+        clearSessionStorage: _clearSessionStorage,
+        changeFilter: _changeFilter
+    };
+})();

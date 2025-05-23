@@ -1,0 +1,143 @@
+var indexCtrl = (function () {
+
+    /**
+     * chargeMenu permet d'afficher les éléments du menu
+     * @returns void
+     */
+    function _chargerMenu() {
+        $(".user-info").load("../../pages/Elements-Html/infoUser.html");
+        $(".navbar").load("../../pages/Elements-Html/navbar.html");
+        $(".menu").load("../../pages/Elements-Html/menu.html");
+        $(".legal").load("../../pages/Elements-Html/footer.html");
+    }
+
+    /**
+     * ouvrirFermerMenu est ce qui rend la page responsive
+     * @param boolean bool
+     * @returns void
+     */
+    function _ouvrirFermerMenu(bool) {
+        if (bool) {
+            $('body').addClass('overlay-open');
+            $('.bars').attr('href', 'javascript:indexCtrl.ouvrirFermerMenu(false);');
+        } else {
+            $('body').removeClass('overlay-open');
+            $('.bars').attr('href', 'javascript:indexCtrl.ouvrirFermerMenu(true);');
+        }
+    }
+
+    /**
+     * afficherElementsMenu permet d'afficher les bons éléments du menu selon le role de l'utilisateur
+     * @returns void
+     */
+    function _afficherElementsMenu(nomPage) {
+        if (sessionManager.isLogged()) {
+            var lstMag = '<ul class="header bg-blue-grey ">FOURNISSEURS</ul>' +
+            '<li id="menu-stockEmf"> <a href="../../pages/Fournisseurs/stockEmf.html">' +
+            '<i class="material-icons">shopping_cart</i><span>Etat du stock</span></a></li>' +
+            '<li id="menu-fournisseurs"> <a href="../../pages/Fournisseurs/fournisseurs.html">' +
+            '<i class="material-icons">local_shipping</i> <span>Liste des fournisseurs</span>' +
+            '</a> </li><li id="menu-addFournisseur"> <a href="../../pages/Fournisseurs/addFournisseur.html">' + 
+            '<i class="material-icons">person_add</i> <span>Ajouter un fournisseur</span> </a> </li>';
+
+            var lstAdmin = '<li class="header bg-blue">COMMANDES MATERIEL SCOLAIRE</li>' + 
+            '<li id="menu-commandesms"> <a class="waves-block waves-effect"' + 
+            'href=../../pages/MaterielScolaire/commandesms.html> <i class="material-icons">' +
+            'assignment</i> <span>Liste des commandes MS</span> </a> </li> <li id="menu-articles"> ' +
+            '<a class="waves-block waves-effect" href=../../pages/MaterielScolaire/articles.html> ' +
+            '<i class="material-icons">list</i> <span>Liste des articles MS</span> </a></li> ' +
+            '<li id="menu-classes"> <a class="waves-block waves-effect" href=../../pages/MaterielScolaire/classes.html> ' +
+            '<i class="material-icons">store</i> <span>Liste des classes MS</span> </a></li>' +
+            '<li id="menu-exportsms"> <a class="waves-block waves-effect" href=../../pages/MaterielScolaire/exportsms.html> ' +
+            '<i class="material-icons">import_export</i> <span>Exports</span> </a></li><li class="header bg-red">ADMINISTRATION</li>' +
+            '<li id="menu-utilisateurs"> <a class="waves-block waves-effect" href=../../pages/Administration/utilisateurs.html> ' +
+            '<i class="material-icons">people_outline</i> <span>Gestion des utilisateurs</span> </a></li>' +
+            '<li id="menu-devises"> <a class="waves-block waves-effect" href=../../pages/Administration/devises.html> ' +
+            '<i class="material-icons">monetization_on</i> <span>Gestion des devises</span> </a></li><li id="menu-sections"> ' +
+            '<a class="waves-block waves-effect" href=../../pages/Administration/sections.html> ' +
+            '<i class="material-icons">account_balance</i> <span>Gestion des comptes et sections</span> </a></li>';
+
+            var lstProf = '<li class="header bg-blue">COMMANDES MATERIEL SCOLAIRE</li> ' +
+            '<li id="menu-commandesms"> <a class="waves-block waves-effect" href=../../pages/MaterielScolaire/commandesms.html> ' +
+            '<i class="material-icons">assignment</i> <span>Liste des commandes MS</span> </a> </li> ' +
+            '<li id="menu-articles"> <a class="waves-block waves-effect" href=../../pages/MaterielScolaire/articles.html> ' +
+            '<i class="material-icons">list</i> <span>Liste des articles MS</span> </a></li> ' +
+            '<li class="header bg-red">ADMINISTRATION</li><li id="menu-utilisateurs"> ' +
+            '<a class="waves-block waves-effect" href=../../pages/Administration/utilisateurs.html> ' +
+            '<i class="material-icons">people_outline</i> <span>Gestion des élèves</span> </a></li>';
+            
+            if (sessionManager.isAtLeastMag()) {
+                $(".list").append(lstMag);
+            }
+            if (sessionManager.isAdmin()) {
+                $(".list").append(lstAdmin);
+            }
+            if(sessionManager.isProf() || sessionManager.isDoyen()){
+                $(".list").append(lstProf);
+            }
+        } else {
+            $("#menu_nomUser").addClass("col-red").html("<i>Vous n'êtes </i><b>pas connecté</b>");
+            $("#menu_mailUser").addClass("col-red").html("<i class='material-icons'>error_outline</i>");
+            console.log("Erreur lors du chargement des informations utilisateur dans le menu !");
+            console.log(localStorage);
+        }
+        $("#menu-" + nomPage).addClass("active");
+        if (nomPage === "uneCommande" || nomPage === "updateCommande") {
+            $("#menu-commandes").addClass("active");
+        }
+        $.AdminBSB.leftSideBar.setMenuHeight();
+        $.AdminBSB.leftSideBar.activate();
+    }
+    /**
+     * logout permet de se déloguer
+     * @returns false
+     */
+    function _logout() {
+        sessionManager.removeInfoUser();
+        sessionManager.removeFavoris();
+        sessionStorage.clear();
+        appelsServeurWrk.logout();
+        return false;
+    }
+
+    /**
+     * afficheAPropos permet d'afficher le "à propos"
+     * @returns void
+     */
+    function _afficheAPropos() {
+        var laPhrase = "<img src='../../images/emf.jpg' style='width:50%'/>"
+                + "<table border='1' width='100%'>"
+                + "<tr><th><b>Version</b></th><th><b>Date</b></th><th><b>Informations/Modifications</b></th></tr>"
+                + "<tr bgcolor='#CCCCCC'><th colspan='3'>SE 2016 : Bruno Almeida</th></tr>"
+                + "<tr><td>0.0</td><td></td><td>Analyse</td></tr>"
+                + "<tr bgcolor='#CCCCCC'><th colspan='3'>SH 2017 : Laure Würgler et Gil Marcelino</th></tr>"
+                + "<tr><td>1.0</td><td>23.12.2016</td><td>Première version en production</td></tr>"
+                + "<tr bgcolor='#CCCCCC'><th colspan='3'>SE 2017 : Victor Bernet et Tony Licata</th></tr>"
+                + "<tr><td>2.0-2.1</td><td>31.03.2017</td><td>Commandes d'investissement et à l'étranger</td></tr>"
+                + "<tr bgcolor='#CCCCCC'><th colspan='3'>SH 2018 : Sam Corpataux et Loris Kenklies</th></tr>"
+                + "<tr><td>2.2-2.4</td><td>02.10.2017</td><td>PDF, recherche avancée</td></tr>"
+                + "<tr bgcolor='#CCCCCC'><th colspan='3'>SE 2018 : Mickael Carvalho et Tiffanie Gogniat</th></tr>"
+                + "<tr><td>2.5-3.3</td><td>31.01.2018</td><td>Gestion des commentaires, droits Elève et Doyen</td></tr>"
+                + "<tr bgcolor='#CCCCCC'><th colspan='3'>SE 2020 : Leonel Silva</th></tr>"
+                + "<tr><td>4.0</td><td>09.03.2020</td><td>Authentification de SAML</td></tr>"
+                + "<tr bgcolor='#CCCCCC'><th colspan='3'>SE 2021 : Marianna de Oliveira Guimaraes</th></tr>"
+                + "<tr><td>4.1-5.0</td><td>13.01.2021</td><td>Conditions générales et matériel scolaire</td></tr>"
+                + "<tr bgcolor='#CCCCCC'><th colspan='3'>SE 2023: Noé Roulin</th></tr>"
+                + "<tr><td>6.0 - 6.5</td><td>26.04.2023</td><td>Authentification avec OpenId || Navigation entre commandes</td></tr>"
+                + "</table>"
+                + "<p><b>Chef de projet : Olivier Neuhaus</b></p>Contact <a href='mailto:info@gestcom.emf-infopro.ch'>info@gestcom-emf-infopro.ch</a>";
+        swal({
+            title: 'GestCom - A propos...',
+            text: laPhrase,
+            html: true
+        });
+    }
+
+    return {
+        logout: _logout,
+        chargerMenu: _chargerMenu,
+        afficherElementsMenu: _afficherElementsMenu,
+        ouvrirFermerMenu: _ouvrirFermerMenu,
+        afficheAPropos: _afficheAPropos
+    };
+})();

@@ -1,0 +1,25 @@
+------------------------------------------------------------------------------------------
+Gerber File Extension Report For: carte_electronique_didactique_PittetL02_PCB.GBR   22.05.2025  15:09:43
+------------------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------------------
+Layer Extension     Layer Description                      
+------------------------------------------------------------------------------------------
+.gbr                Top Overlay                             
+.gbr                Top Solder                              
+.gbr                Top Layer                               
+.gbr                Bottom Layer                            
+.gbr                Bottom Solder                           
+.gbr                Bottom Overlay                          
+.gbr                Outline                                 
+.gbr                Route Tool Path                         
+.gbr                Dimensions                              
+.gbr                Top 3D Body                             
+.gbr                Bottom 3D Body                          
+.gbr                Body Center                             
+.gbr                Top Assembly                            
+.gbr                Bottom Assembly                         
+.gbr                Top Courtyard                           
+.gbr                Bottom Courtyard                        
+------------------------------------------------------------------------------------------

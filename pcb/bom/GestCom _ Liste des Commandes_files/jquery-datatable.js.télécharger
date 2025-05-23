@@ -1,0 +1,15 @@
+/*$(function () {
+    $('.js-basic-example').DataTable();
+
+    //Exportable table
+    var tableExport = $('.js-exportable').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    });
+    
+    /*tableExport.buttons( 0, null ).container().appendTo(
+        tableExport.table().container()
+    );*/
+/*});*/

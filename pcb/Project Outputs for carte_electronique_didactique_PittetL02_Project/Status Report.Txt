@@ -1,0 +1,15 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : Project [carte_electronique_didactique_PittetL02_Project.PrjPcb]
+   Generated File[carte_electronique_didactique_PittetL02_PCB-Plated.TXT]
+   Generated File[carte_electronique_didactique_PittetL02_PCB-NonPlated.TXT]
+   Generated File[carte_electronique_didactique_PittetL02_PCB.DRL]
+   Generated File[carte_electronique_didactique_PittetL02_PCB-BoardEdgeRout.TXT]
+   Generated File[carte_electronique_didactique_PittetL02_PCB.LDP]
+   Generated File[carte_electronique_didactique_PittetL02_PCB.DRR]
+
+
+Files Generated   : 6
+Documents Printed : 0
+
+Finished Output Generation At 15:09:59 On 22.05.2025

@@ -1,0 +1,11 @@
+$(function () {
+    var prenomUser = sessionManager.getPrenom();
+    var nomUser = sessionManager.getNom();
+    $("#menu_nomUser").text(prenomUser + " " + nomUser);
+    $("#menu_mailUser").text(sessionManager.getEmail());
+    if (sessionManager.isAtLeastProf()) {
+        $("#menu_user-logout").append('<li><a href="../Administration/monProfil.html"><i class="material-icons">person</i>Profil</a></li><li class="divider"></li><li><a href="../Administration/favoris.html"><i class="material-icons">star</i>Favoris</a></li><li class="divider"></li><li><a target="_blank" href="../../data/Instructions/Directive_Interne.pdf"><i class="material-icons">help</i>Directive interne</a></li><li class="divider"></li><li><a href="/" onclick="return indexCtrl.logout();"><i class="material-icons">exit_to_app</i>Se déconnecter</a></li>');
+    } else {
+        $("#menu_user-logout").append('<li><a target="_blank" href="../../data/Instructions/Directive_Interne.pdf"><i class="material-icons">help</i>Directive interne</a></li><li class="divider"></li><li><a onclick="return indexCtrl.logout();"><i class="material-icons">exit_to_app</i>Se déconnecter</a></li>');
+    }
+});

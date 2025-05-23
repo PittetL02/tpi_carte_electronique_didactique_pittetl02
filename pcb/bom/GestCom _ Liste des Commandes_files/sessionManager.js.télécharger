@@ -1,0 +1,367 @@
+var sessionManager = (function () {
+    // Constante concernant les roles
+    const FK_ROLE = "FK_Role";
+    const ROLE_ELEVE_ID = 1;
+    const ROLE_PROF_ID = 2;
+    const ROLE_DOYEN_ID = 3;
+    const ROLE_MAG_ID = 4;
+    const ROLE_ADMIN_ID = 5;
+
+    // Constante concernant les valeurs dans le storage
+    const INFO_USER = jQuery.parseJSON(localStorage.getItem("infosUser"));
+    const FAVORIS = jQuery.parseJSON(sessionStorage.getItem('favoris'));
+    
+
+    // <editor-fold defaultstate="collapsed" desc="Information Utilisateur...">
+    /**
+     * Insert la valeur donnée dans le local storage en tant que InfosUser
+     * @param Array data valeur à inserer
+     * @returns void
+     */
+    function _setInfoUser(data) {
+        localStorage.setItem("infosUser", data);
+    }
+    /**
+     * Supprime l'infosUser du local storage
+     * @returns void
+     */
+    function _removeInfoUser() {
+        localStorage.removeItem("infosUser");
+    }
+    /**
+     * Retourne l'infosUser du local storage
+     * @returns Array information de l'utilisateur
+     */
+    function _getInfosUser() {
+        return INFO_USER;
+    }
+    /**
+     * Retourne la Pk de l'utilisateur
+     * @returns int (Error : Null)
+     */
+    function _getPK_Utilisateur() {
+        return (INFO_USER) ? INFO_USER["PK_Utilisateur"] : null;
+    }
+    /**
+     * Retourne le nom de l'utilisateur
+     * @returns String (Error : Null)
+     */
+    function _getNom() {
+        return (INFO_USER) ? INFO_USER["Nom"] : null;
+    }
+    /**
+     * Retourne le prenom de l'utilisateur
+     * @returns String (Error : Null)
+     */
+    function _getPrenom() {
+        return (INFO_USER) ? INFO_USER["Prenom"] : null;
+    }
+    /**
+     * Retourne le redirectToLogin de l'utilisateur
+     * @returns String (Error : Null)
+     */
+    function _getEmail() {
+        return (INFO_USER) ? INFO_USER["Email"] : null;
+    }
+    /**
+     * Retourne si l'utilisateur est actif ou non
+     * @returns boolean (Error : Null)
+     */
+    function _getActif() {
+        return (INFO_USER) ? INFO_USER["Actif"] : null;
+    }
+    /**
+     * Retourne la FK du role de l'utilisateur
+     * @returns int (Error : Null)
+     */
+    function _getFK_Role() {
+        return (INFO_USER) ? INFO_USER["FK_Role"] : null;
+    }
+    /**
+     * Retourne la FK de la section de l'utilisateur
+     * @returns int (Error : Null)
+     */
+    function _getFK_Section() {
+        return (INFO_USER) ? INFO_USER["FK_Section"] : null;
+    }
+    /**
+     * Retourne la section de l'utilisateur
+     * @returns String (Error : Null)
+     */
+    function _getSection() {
+        return (INFO_USER) ? INFO_USER["Section"] : null;
+    }
+    /**
+     * Retourne le rôle de l'utilisateur
+     * @returns String (Error : Null)
+     */
+    function _getRole() {
+        return (INFO_USER) ? INFO_USER["Role"] : null;
+    }
+    /**
+     * Retourne si l'utilisateur est connecté ou non
+     * @returns String (Error : Null)
+     */
+    function _isLogged() {
+        return INFO_USER !== null;
+    }
+
+// </editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Gestion des Rôles...">
+
+    /**
+     * Vérifie que l'utilisateur est un élève.
+     * 
+     * @returns {Boolean}   true si l'utilisateur est un élève
+     *                      false si l'utilisateur n'est pas un élève
+     */
+    function _isEleve() {
+        return INFO_USER && INFO_USER[FK_ROLE] == ROLE_ELEVE_ID;
+    }
+
+    /**
+     * Vérifie que l'utilisateur est un professeur.
+     * 
+     * @returns {Boolean}   true si l'utilisateur est un professeur
+     *                      false si l'utilisateur n'est pas un professeur
+     */
+    function _isProf() {
+        return INFO_USER && INFO_USER[FK_ROLE] == ROLE_PROF_ID;
+    }
+
+    /**
+     * Vérifie que l'utilisateur est un doyen.
+     * 
+     * @returns {Boolean}   true si l'utilisateur est un doyen
+     *                      false si l'utilisateur n'est pas un doyen
+     */
+    function _isDoyen() {
+        return INFO_USER && INFO_USER[FK_ROLE] == ROLE_DOYEN_ID;
+    }
+
+    /**
+     * Vérifie que l'utilisateur est un magasinier.
+     * 
+     * @returns {Boolean}   true si l'utilisateur est un magasinier
+     *                      false si l'utilisateur n'est pas un magasinier
+     */
+    function _isMag() {
+        return INFO_USER && INFO_USER[FK_ROLE] == ROLE_MAG_ID;
+    }
+
+    /**
+     * Vérifie que l'utilisateur est un administrateur.
+     * 
+     * @returns {Boolean}   true si l'utilisateur est un administrateur
+     *                      false si l'utilisateur n'est pas un administrateur
+     */
+    function _isAdmin() {
+        return INFO_USER && INFO_USER[FK_ROLE] == ROLE_ADMIN_ID;
+    }
+
+    /**
+     * Vérifie que l'utilisateur est au moins un élève.
+     * 
+     * @returns {Boolean}   true si l'utilisateur est au moins un élève
+     *                      false si l'utilisateur n'est pas au moins un élève
+     */
+    function _isAtLeastEleve() {
+        return INFO_USER && INFO_USER[FK_ROLE] >= ROLE_ELEVE_ID;
+    }
+
+    /**
+     * Vérifie que l'utilisateur est au moins un professeur.
+     * 
+     * @returns {Boolean}   true si l'utilisateur est au moins un professeur
+     *                      false si l'utilisateur n'est pas au moins un professeur
+     */
+    function _isAtLeastProf() {
+        return INFO_USER && INFO_USER[FK_ROLE] >= ROLE_PROF_ID;
+    }
+
+    /**
+     * Vérifie que l'utilisateur est au moins un doyen.
+     * 
+     * @returns {Boolean}   true si l'utilisateur est au moins un doyen
+     *                      false si l'utilisateur n'est pas au moins un doyen
+     */
+    function _isAtLeastDoyen() {
+        return INFO_USER && INFO_USER[FK_ROLE] >= ROLE_DOYEN_ID;
+    }
+
+    /**
+     * Vérifie que l'utilisateur est au moins un magasinier.
+     * 
+     * @returns {Boolean}   true si l'utilisateur est au moins un magasinier
+     *                      false si l'utilisateur n'est pas au moins un magasinier
+     */
+    function _isAtLeastMag() {
+        return INFO_USER && INFO_USER[FK_ROLE] >= ROLE_MAG_ID;
+    }
+
+    /**
+     * Vérifie que l'utilisateur est au moins un administrateur.
+     * 
+     * @returns {Boolean}   true si l'utilisateur est au moins un administrateur
+     *                      false si l'utilisateur n'est pas au moins un administrateur
+     */
+    function _isAtLeastAdmin() {
+        return INFO_USER && INFO_USER[FK_ROLE] >= ROLE_ADMIN_ID;
+    }
+
+    // </editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Gestion des favoris...">
+    /**
+     * Retourne si l'utilisateur a des favoris ou non
+     * @returns boolean true s'il en a
+     *                  false s'il n'en a pas
+     */
+    function _hasFavoris() {
+        return FAVORIS ? true : false;
+    }
+    /**
+     * Insert la valeur donnée dans le local storage en tant que favoris
+     * @param Array data valeur à inserer
+     * @returns void
+     */
+    function _setFavoris(favoris) {
+        sessionStorage.setItem('favoris', favoris);
+    }
+    /**
+     * Supprime les favoris du local storage
+     * @returns void
+     */
+    function _removeFavoris() {
+        sessionStorage.removeItem('favoris');
+    }
+    /**
+     * Retourne le type de commande mise en favori
+     * @return String
+     */
+    function _getFavorisType() {
+        return FAVORIS["FK_TypeCommande"];
+    }
+    /**
+     * Retourne la section mise en favori
+     * @return String
+     */
+    function _getFavorisSection() {
+        return FAVORIS['FK_Section'];
+    }
+    /**
+     * Retourne le compte mis en favori
+     * @return String
+     */
+    function _getFavorisCompte() {
+        return FAVORIS['FK_Compte'];
+    }
+    /**
+     * Retourne l'utilisateur pour qui la commande est passé mis en favori
+     * @return String
+     */
+    function _getFavorisUtilisateurPasse() {
+        return FAVORIS['FK_UtilisateurPasse'];
+    }
+    /**
+     * Retourne la FK de l'adresse de livraision mise en favori
+     * @return int
+     */
+    function _getFavorisAdresseLivraison() {
+        return FAVORIS['FK_AdresseDeLivraison'];
+    }
+    /**
+     * Retourne le nom de module/projet mis en favori
+     * @return String
+     */
+    function _getFavorisModule() {
+        return FAVORIS['Module'];
+    }
+    /**
+     * Retourne la fk du fournisseur mise en favori
+     * @return String
+     */
+    function _getFavorisFournisseur() {
+        return FAVORIS['FK_Fournisseur'];
+    }
+    /**
+     * Retourne la fk de la devise mise en favori
+     * @return String
+     */
+    function _getFavorisDevise() {
+        return FAVORIS['FK_Devise'];
+    }
+    /**
+     * Retourne la TVA mise en favori
+     * @return double
+     */
+    function _getFavorisTVA() {
+        return FAVORIS['TVA'];
+    }
+    /**
+     * Retourne la valeur bouton Urgente est en favoris ou non
+     * @return boolean
+     */
+    function _getFavorisUrgente() {
+        return FAVORIS['Urgente'];
+    }
+    /**
+     * Retourne la valeur bouton deja effectuee est en favoris ou non
+     * @return boolean
+     */
+    function _getFavorisDejaEffectuee() {
+        return FAVORIS['DejaEffectuee'];
+    }
+    /**
+     * Retourne la valeur bouton deja livree est en favoris ou non
+     * @return boolean
+     */
+    function _getFavorisDejaLivree() {
+        return FAVORIS['DejaLivree'];
+    }
+
+    // </editor-fold>
+
+
+    return {
+        isLogged: _isLogged,
+        isEleve: _isEleve,
+        isProf: _isProf,
+        isDoyen: _isDoyen,
+        isMag: _isMag,
+        isAdmin: _isAdmin,
+        isAtLeastEleve: _isAtLeastEleve,
+        isAtLeastProf: _isAtLeastProf,
+        isAtLeastDoyen: _isAtLeastDoyen,
+        isAtLeastMag: _isAtLeastMag,
+        isAtLeastAdmin: _isAtLeastAdmin,
+        setInfoUser: _setInfoUser,
+        removeInfoUser: _removeInfoUser,
+        getPK_Utilisateur: _getPK_Utilisateur,
+        getNom: _getNom,
+        getPrenom: _getPrenom,
+        getEmail: _getEmail,
+        getActif: _getActif,
+        getFK_Role: _getFK_Role,
+        getFK_Section: _getFK_Section,
+        getSection: _getSection,
+        getRole: _getRole,
+        getInfosUser: _getInfosUser,
+        hasFavoris: _hasFavoris,
+        setFavoris: _setFavoris,
+        removeFavoris: _removeFavoris,
+        getFavorisType: _getFavorisType,
+        getFavorisSection: _getFavorisSection,
+        getFavorisCompte: _getFavorisCompte,
+        getFavorisUtilisateurPasse: _getFavorisUtilisateurPasse,
+        getFavorisAdresseLivraison: _getFavorisAdresseLivraison,
+        getFavorisModule: _getFavorisModule,
+        getFavorisFournisseur: _getFavorisFournisseur,
+        getFavorisDevise: _getFavorisDevise,
+        getFavorisTVA: _getFavorisTVA,
+        getFavorisUrgente: _getFavorisUrgente,
+        getFavorisDejaEffectuee: _getFavorisDejaEffectuee,
+        getFavorisDejaLivree: _getFavorisDejaLivree
+    };
+})();

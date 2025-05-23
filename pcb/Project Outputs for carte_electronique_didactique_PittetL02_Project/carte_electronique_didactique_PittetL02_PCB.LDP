@@ -1,0 +1,3 @@
+Layer Pairs Export File for PCB: C:\Users\PittetL02\OneDrive - EDUETATFR\TPI_PITTETL02\tpi_carte_electronique_didactique_pittetl02\pcb\carte_electronique_didactique_PittetL02_PCB.PcbDoc
+LayersSetName=Top_Bot_Plated_Thru_Holes|DrillFile=carte_electronique_didactique_pittetl02_pcb-plated.txt|DrillLayers=gtl,gbl
+LayersSetName=Top_Bot_NonPlated_Thru_Holes|DrillFile=carte_electronique_didactique_pittetl02_pcb-nonplated.txt|DrillLayers=gtl,gbl

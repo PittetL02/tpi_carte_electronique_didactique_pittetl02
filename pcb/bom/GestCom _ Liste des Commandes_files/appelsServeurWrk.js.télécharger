@@ -1,0 +1,1984 @@
+var appelsServeurWrk = (function () {
+    /**
+     * addCommande permet d'ajouter la commande passée en paramètre dans la base
+     * de donnée.
+     * @param Object commande
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _addCommande(commande, commandeDejaEffectuee, fournitureDejaLivree, cheminTmpDossierPDF, successCallback, errorCallback) {
+        console.log(commande);
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "addCommande",
+                "commande": commande,
+                "commandeDejaEffectuee": commandeDejaEffectuee,
+                "fournitureDejaLivree": fournitureDejaLivree,
+                "cheminTmpDossierPDF": cheminTmpDossierPDF
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * addDevise permet d'ajouter la devise passée en paramètre dans la base
+     * de donnée.
+     * @param Object devise
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _addDevise(devise, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "addDevise",
+                "devise": devise
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * addFournisseur permet d'ajouter le fournisseur passée en paramètre dans la base
+     * de donnée.
+     * @param Object jsonobj
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _addFournisseur(jsonobj, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "addFournisseur",
+                "fournisseurAjoute": jsonobj
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * addUtilisateur permet d'ajouter le fournisseur passée en paramètre dans la base
+     * de donnée. Le String sendEmail contiendra "true" ou "false".
+     * @param String sendEmail
+     * @param Object jsonobj
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _addUtilisateur(sendEmail, jsonobj, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "addUtilisateur",
+                "sendEmail": sendEmail,
+                "utilisateur": jsonobj
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * addUtilisateur permet d'ajouter la classe passée en paramètre dans la base
+     * de donnée. 
+     * @param Object jsonobj
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _addClasse(jsonobj, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "addClasse",
+                "classe": jsonobj
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * deleteCommande permet de supprimer une commande du serveur selon la pk
+     * donnée en paramètre
+     * @param String pkCommande
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _deleteCommande(pkCommande, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "deleteCommande",
+                "pkCommande": pkCommande
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * Controle si un cookie est présent pour l'utilisateur
+     * @param function successCallback
+     * @param function errorCallback
+     */
+    function _checkCookie(successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "checkCookie"
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * fournisseurRemplace permet de remplacer un fournisseur à valider en
+     * un autre fournisseur. Ainsi, la commande liée au fournisseur à valider
+     * se liera au nouveau fournisseur.
+     * @param Object fournisseurRemplace
+     * @param String pkFournisseurARemplacer
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _fournisseurRemplace(fournisseurRemplace, pkFournisseurARemplacer, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "fournisseurRemplace",
+                "pkFournisseurARemplacer": fournisseurRemplace,
+                "pkFournisseurRemplacement": pkFournisseurARemplacer
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * getAdresseLivraison récupére toutes les adresses de livraison.
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _getAdresseLivraison(successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getAdresseLivraison"
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * getCommandes récupère toutes les commandes. Il possède un paramètre
+     * prises aussi. Il contient un string étant égal à "true" ou "false".
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _getCommandes(withEnPreparation, _getLstCommandeDefaultSuccess, _getLstCommandeDefaultError) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getCommandes",
+                "withEnPreparation": withEnPreparation
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: _getLstCommandeDefaultSuccess,
+            error: _getLstCommandeDefaultError
+        });
+    }
+
+    /**
+     * getCommandeDetails récupère la commande correspondante à la pk donnée
+     * @param String pkCommande
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _getCommandeDetails(pkCommande, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getCommandeDetails",
+                "pkCommande": pkCommande
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * _getCommandesSummary récupère le nombre de commande correspondant à chaque
+     * statuts.
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _getCommandesSummary(successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getCommandesSummary"
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * getCompteBySectionType récupère les comptes correspondant à la section
+     * et le type de compte donné
+     * @param String pkSection
+     * @param String pkCommandeType
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _getCompteBySectionType(pkSection, pkCommandeType, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getCompteBySectionType",
+                "fkSection": pkSection,
+                "fkType": pkCommandeType
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    function _getComptesInfos(fkSection, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getComptesInfos",
+                "fkSection": fkSection
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * getDevise récupère la Devise correspondante à la pk donnée
+     * @param String pkDevise
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _getDevise(pkDevise, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getDevise",
+                "pkDevise": pkDevise
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * getDevises récupère toutes les devises
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _getDevises(successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getDevises"
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * getAllFournisseurs récupère tous les fournisseurs
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _getAllFournisseurs(withInactif, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getAllFournisseurs",
+                "withInactif": withInactif
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * getFournisseurUsageUnique récupère les fournisseurs qui sont a usage unique
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _getFournisseursUsageUnique(successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getFournisseursUsageUnique"
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * getFournisseursMaterielScolaire Méthode qui permet de récupérer tous les fournisseurs de matériel scolaire
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _getFournisseursMaterielScolaire(successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getFournisseursMaterielScolaire"
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+
+    /**
+     * getFournisseurAValider récupère les fournisseurs qui attendent d'être validés
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _getFournisseurAValider(successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getFournisseurAValider"
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * getFournisseurByPk récupère le fournisseur correspondant à la pk donnée
+     * @param String pkFournisseur
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _getFournisseurByPk(pkFournisseur, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getFournisseur",
+                "pk": pkFournisseur
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * getFournisseurBySection récupère les fournisseurs correspondant à la pk
+     * de la section donnée. withInactif contient "true" ou "false".
+     * @param String pkSection
+     * @param String withInactif
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _getFournisseurBySection(pkSection, withInactif, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getFournisseurBySection",
+                "fkSection": pkSection,
+                "withInactif": withInactif
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * getFournisseurBySection récupère les fournisseurs correspondant à la pk
+     * de la section désirée ET de la section commun. withInactif contient "true" ou "false".
+     * @param String pkSection
+     * @param String withInactif
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _getFournisseurBySectionCom(pkSection, withInactif, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getFournisseurBySectionCom",
+                "fkSection": pkSection,
+                "withInactif": withInactif
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * getFournisseursSummary récupère le nombre de fournisseurs qui attendent d'être validés
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _getFournisseursSummary(successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getFournisseursSummary"
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * getPays récupère tous les pays
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _getPays(successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getPays"
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * getRoles récupère tous les roles autres de Elève
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _getRoles(successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getRoles"
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    function _getRoleEleve(successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getRoleEleve"
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * getSections récupère toutes les sections
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _getSections(successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getSections"
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+
+    /**
+     * getFournisseurMS permet de recupérér tous les fournisseurs de matériel scolaire
+     * @param {*} successCallback 
+     * @param {*} errorCallback 
+     */
+    function _getFournisseurMS(successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getFournisseurMS"
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+
+    function _getSectionUtilisateur(successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getSectionUtilisateur"
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+    /**
+     * getSections récupère toutes les sections
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _addSection(section, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "addSection",
+                "section": section
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    function _deleteSection(pkSection, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "deleteSection",
+                "pkSection": pkSection
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    function _updateSection(pkSection, newNomSection, personneContact, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "updateSection",
+                "pkSection": pkSection,
+                "nouveauNom": newNomSection,
+                "personneContact": personneContact
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    function _updateComptes(comptes, successCallback, errorCallback) {
+        console.log(comptes);
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "updateComptes",
+                "comptes": comptes
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * getStatutCmd récupère tous les statuts des commandes
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _getStatutCmd(successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getStatutCmd"
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * getStatutFac récupère tous les statuts des factures
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _getStatutFac(successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getStatutFac"
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * getStatutLiv récupère tous les statuts des livraisons
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _getStatutLiv(successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getStatutLiv"
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * getStatutLiv récupère tous les types de commandes
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _getTypeCmd(successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getTypeCmd"
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * getTVA récupère la TVA par défaut
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _getTVA(successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getTVA"
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * getUtilisateur récupère l'utilisateur correspondant à la pk donnée
+     * @param String pkUser
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _getUtilisateur(pkUser, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getUtilisateur",
+                "pk": pkUser
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * getCommandeFournisseur récupère la commande lié à la PK donnée
+     * @param String pkFournisseur
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _getCommandeFournisseur(pkFournisseur, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getCommandeFournisseur",
+                "pk": pkFournisseur
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * getUtilisateursBySection récupère tous les utilisateurs correspondant à la pk de
+     * section donnée. withInactif définit s'il faut aussi récupérer les utilisateurs
+     * inactifs. il contient "true" ou "false".
+     * @param String pkSection
+     * @param String withInactif
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _getUtilisateursBySection(pkSection, withInactif, withDoyen, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getUtilisateursBySection",
+                "FK_Section": pkSection,
+                "WithInactif": withInactif,
+                "WithDoyen": withDoyen
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    function _getElevesBySection(pkSection, withInactif, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getElevesBySection",
+                "WithInactif": withInactif,
+                "FK_Section": pkSection
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+    
+    /**
+     * Recupere la classe et le nombre deleves par classe pas section
+     * @param mixed pkSection
+     * @param mixed successCallback
+     * @param mixed errorCallback
+     * 
+     * @return void
+     */
+    function _getElevesClassesBySection(pkSection, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getElevesClassesBySection",
+                "FK_Section": pkSection
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * Recuper la classe et le nombre deleves par classe pas section (Aussi les inactifs)
+     * @param {*} pkSection 
+     * @param {*} successCallback 
+     * @param {*} errorCallback 
+     */
+    function _getElevesClassesBySectionWithIncatif(pkSection, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getElevesClassesBySectionWithIncatif",
+                "FK_Section": pkSection
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+
+    /**
+     * recupère toutes les classes actives
+     * @param {} successCallback 
+     * @param {*} errorCallback 
+     * @returns void
+     */
+    function _getAllClasses(successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getAllClasses"
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+
+    /**
+     * Méthode qui permet de récupérer tous les articles
+     * @param withAValider boolean (1-0) pour indiquer s'il faut récupèrer également les articles à valider
+     * @param withInactif boolean (1-0) pour indiquer s'il faut récupèrer également les articles inactifs
+     * @param {*} successCallback 
+     * @param {*} errorCallback 
+     */
+    function _getAllArticles(withInactif, withAValider, successCallback, errorCallback) {
+
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getAllArticles",
+                "withInactif": withInactif,
+                "withAValider": withAValider
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    
+    /**
+     * Recupere toutes les commandes de matériel scolaire 
+     * @param mixed pkSection
+     * @param mixed fkSectionUser
+     * @param mixed withTerminee - boolean (0-1) pour savoir s'il faut également prendre les commandes terminées
+     * @param mixed mag - boolean (0-1) pour savoir si l'utilisateur est maganisier
+     * @param mixed successCallback
+     * @param mixed errorCallback
+     * 
+     * @return void
+     */
+    function _getAllCommandesMs(pkSection, fkSectionUser, withTerminee, mag, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getAllCommandesMs",
+                "pkSection": pkSection,
+                "fkSectionUser": fkSectionUser,
+                "withTerminee": withTerminee,
+                "mag": mag
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * recupère toutes les classes (actives et inactives)
+     * @param {*} successCallback 
+     * @param {*} errorCallback 
+     * @returns void
+     */
+    function _getAllClassesWithInactif(successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getAllClassesWithInactif"
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * getUtilisateursForContact récupère tous les utilisateurs doyen ou admin
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _getUtilisateursForContact(successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getUtilisateursForContact"
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * redirectToLogin permet è l'utilisateur de se log si il rentre les bons identifiants.
+     * @returns void
+     */
+    function _checkLogin() {
+        var urlgestcom = constantes.URL_GESTCOM();
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "redirectToLogin"
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: function (result) {
+                var user = result;
+                if (user['result'] == "1") {
+                    sessionManager.removeInfoUser();
+                    if (result["body"][0]["FK_Section"] != "" && result["body"][0]["Section"] != null) {
+                        sessionManager.setInfoUser(JSON.stringify(result["body"][0]));
+                        document.location.href = urlgestcom + 'pages/Accueil/accueil.html';
+                    } else {
+                        sessionManager.setInfoUser(JSON.stringify(result["body"][0]));
+                        document.location.href = urlgestcom + 'pages/Administration/addSection.html';
+                    }
+                } else if (user['result'] == "-2") {
+                    _logout();
+                } else {
+                    _redirectToLogin();
+                }
+            }
+        });
+    }
+
+    function _redirectToLogin() {
+        var urlgestcom = constantes.URL_GESTCOM();
+        document.location.href = urlgestcom + "serveur/login.php";
+    }
+
+    /**
+     * logout permet de se déloguer
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _logout() {
+        var urlgestcom = constantes.URL_GESTCOM();
+        document.location.href = urlgestcom + "serveur/logout.php";
+    }
+
+    /**
+     * passwordOublie permet de réinitialiser le mot de passe de l'utilisateur
+     * donné en paramètre.
+     * @param String username
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _passwordOublie(username, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "passwordOublie",
+                "username": username
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * searchCommands permet de faire une recherche avancée dans les commandes
+     * @param String filtre le filtre de recherche au format JSON
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _searchCommands(filtre, successCallback, errorCallback) {
+        console.log(filtre);
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "searchCommands",
+                "filtre": filtre
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * updateCommande permet de mettre à jour la commande possédant la même
+     * pk que la commande passée en paramètre.
+     * @param laCommande Object 
+     * @param successCallback function 
+     * @param errorCallback function 
+     * @returns void
+     */
+    function _updateCommande(laCommande, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "updateCommande",
+                "commandeToUpdate": laCommande
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+    /**
+     * ValideCommande permet de valider la commande passé en paramètre
+     * 
+     * @param Object, commande contenant en plus l'information sur la positionInverstissement
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _valideCommande(commande, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                action: "valideCommande",
+                commande: commande
+            }),
+            dataType: "json",
+            timeout: 50000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+    /**
+     * SoumettreCommande permet de soumettre la commande passé en paramètre
+     * 
+     * @param Object, commande contenant en plus l'information sur la positionInverstissement
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _soumettreCommande(pkCommande, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                action: "soumettreCommande",
+                "PK_Commande": pkCommande,
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * updateCommande permet de mettre à jour la commande possédant la même
+     * pk que la commande passée en paramètre.
+     * @param Object laCommande
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _updateCommandeUrgente(pkCommande, urgent, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "updateCommandeUrgente",
+                "PK_Commande": pkCommande,
+                "urgent": urgent
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * updateDevise permet de mettre à jour la devise possédant la même
+     * pk que la devise passée en paramètre.
+     * @param Object devise
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _updateDevise(devise, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "updateDevise",
+                "deviseModifie": devise
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * updateFournisseur permet de mettre à jour le fournisseur possédant la même
+     * pk que le fournisseur passée en paramètre.
+     * @param Object fournisseur
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _updateFournisseur(fournisseur, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "updateFournisseur",
+                "fournisseurModifie": fournisseur
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+
+    /**
+     * deleteFournisseur permet de supprimer le fournisseur 
+     * @param Object fournisseur
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _deleteFournisseur(fournisseur, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "deleteFournisseur",
+                "fournisseurSupprime": fournisseur
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * deleteFournisseur permet de supprimer le fournisseur 
+     * @param Object fournisseur
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _delFournisseursUsageUniqueSC(successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "deleteFournisseurUsageUniqueSC"
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * updateTVA permet de mettre à jour la TVA par défaut.
+     * @param String TVA
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _updateTVA(TVA, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "updateTVA",
+                "TVA": TVA
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * updateUtilisateur permet de mettre à jour l'utilisateur ayant la même pk
+     * que l'utilisateur passé en paramètre.
+     * @param Object user
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _updateUtilisateur(user, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "updateUtilisateur",
+                "updateUtilisateurJSON": user
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * updateClasse permet de mettre à jour la classe ayant la même pk
+     * que la classe passé en paramètre.
+     * @param Object classe
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _updateClasse(classe, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "updateClasse",
+                "updateClasseJSON": classe
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    function _updateSectionUtilisateur(pkUtilisateur, section, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "updateSectionUtilisateur",
+                "FKsection": section
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+
+    function _souvenirDeMoi(successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "souvenirDeMoi",
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    function _enregistrerFavoris(favoris, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "enregistrerFavoris",
+                "favoris": favoris
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    function _getFavoris(successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getFavoris"
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    function _uploadPdfs(formData, succesCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_PDFUPLOADER(),
+            data: formData,
+            dataType: "json",
+            contentType: false,
+            processData: false,
+            success: succesCallback,
+            error: errorCallback
+        });
+    }
+
+    function _editPdfs(formData, succesCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_PDFUPLOADER(),
+            data: formData,
+            dataType: "json",
+            contentType: false,
+            processData: false,
+            success: succesCallback,
+            error: errorCallback
+        });
+    }
+
+    function _addFichierStock(formData, succesCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_STOCKEMFLOADER(),
+            data: formData,
+            dataType: "json",
+            contentType: false,
+            processData: false,
+            success: succesCallback,
+            error: errorCallback
+        });
+    }
+
+    function _getDerniereDateModifStockEmf(succesCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getDerniereDateModificationStockEMF"
+            }),
+            dataType: "json",
+            contentType: false,
+            processData: false,
+            success: succesCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * Méthode qui permet d’ajouter un article
+     * @param mixed jsonobj (article)
+     * @param mixed successCallback
+     * @param mixed errorCallback
+     * 
+     * @return void
+     */
+    function _addArticleMS(jsonobj, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "addArticleMS",
+                "article": jsonobj
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * Méthode qui permet de modifier un article
+     * @param Object article
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _updateArticle(articlems, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "updateArticle",
+                "updateArticleJSON": articlems
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * deleteArticle permet de supprimer un article selon la pk
+     * donnée en paramètre
+     * @param String pkCommande
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _deleteArticleMS(pkArticleMS, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "deleteArticleMS",
+                "pkArticleMS": pkArticleMS
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * recupère toutes les classes actives
+     * @param {} successCallback 
+     * @param {*} errorCallback 
+     */
+    function _getFirstPKArticleASC(successCallback, errorCallback) {
+
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getFirstPKArticleASC"
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * getCommandes récupère tous les articles de la commande passée en paramètre.
+     * @param pkCommande 
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _getArticlesDeLaCommandeMs(pkCommande, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getArticlesDeLaCommandeMs",
+                "pkCommande": pkCommande
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * addLigneCommande permet d'ajouter la commande passée en paramètre dans la base
+     * de donnée.
+     * @param Object commande
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _addLigneCommande(jsonobj, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "addLigneCommande",
+                "commandeMS": jsonobj
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * modifLigneCommande permet de modifier la commande passée en paramètre dans la base
+     * de donnée.
+     * @param Object commande
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _modifLigneCommande(jsonobj, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "modifLigneCommande",
+                "commandeMSmodif": jsonobj
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * refuserCommandeMS permet de valider la commande passée en paramètre dans la base
+     * de donnée.
+     * @param Object commande
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _refuserCommandeMS(pkcommande, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "refuserCommandeMS",
+                "pkcommande": pkcommande
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * archiverCommandeMS permet d'archiver la commande passée en paramètre dans la base
+     * de donnée. Elle passe en état "Terminée"
+     * @param Object commande
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _archiverCommandeMS(pkcommande, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "archiverCommandeMS",
+                "pkcommande": pkcommande
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * archiverCommandeMS permet de désarchiver la commande passée en paramètre dans la base
+     * Elle passe en état « en cours »
+     * de donnée.
+     * @param Object commande
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _desarchiverCommandeMS(pkcommande, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "desarchiverCommandeMS",
+                "pkcommande": pkcommande
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * checkSiArticleActif permet de vérifier si un article est actif 
+     * @param pkcommande 
+     * @param successCallback 
+     * @param errorCallback 
+     */
+    function _checkSiArticleActif(pkarticle, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "checkSiArticleActif",
+                "pkarticle": pkarticle
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback,
+            async: false
+        });
+    }
+
+    /**
+     * prepareCommandeToDuplicate permet de préparer la commande pour la duplication. 
+     * C'est à dire, tester si les articles et les classes sont toujours actifs
+     * @param mixed jsonElements
+     * @param mixed successCallback
+     * @param mixed errorCallback
+     * 
+     * @return [type]
+     */
+    function _prepareCommandeToDuplicate(jsonElements, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "prepareCommandeToDuplicate",
+                "jsonElements": jsonElements
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback,
+            async: false
+        });
+    }
+
+
+    
+    /**
+     * checkSiClasseActif permet de vérifier si un article est actif 
+     * @param pkcommande 
+     * @param successCallback 
+     * @param errorCallback 
+     */
+     function _checkSiClasseActif(pkclasse, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "checkSiClasseActif",
+                "pkclasse": pkclasse
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback,
+            async: false
+        });
+    }
+
+        /**
+     * checkSiClasseActif permet de vérifier si un article est actif 
+     * @param pkcommande 
+     * @param successCallback 
+     * @param errorCallback 
+     */
+         function _checkSiClassesActif(pkclasses, successCallback, errorCallback) {
+            $.ajax({
+                type: "POST",
+                url: constantes.URL_GESTCOM_MAIN(),
+                data: JSON.stringify({
+                    "action": "checkSiClassesActif",
+                    "pkclasses": pkclasses
+                }),
+                dataType: "json",
+                timeout: 10000,
+                success: successCallback,
+                error: errorCallback,
+                async: false
+            });
+        }
+
+    /**
+     * getArticlesMSaValider récupère le nombre d'articles qui attendent d'être validés
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _getArticlesMSaValider(successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getArticlesMSaValider"
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    /**
+     * getCommandesMSAValider récupère le nombre de comandes MS qui attendent d'être validés
+     * @param function successCallback
+     * @param function errorCallback
+     * @returns void
+     */
+    function _getCommandesMSAValider(successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getCommandesMSAValider"
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+    
+    function _getArticlesSuppByDate(date, successCallback, errorCallback) {
+        $.ajax({
+            type: "POST",
+            url: constantes.URL_GESTCOM_MAIN(),
+            data: JSON.stringify({
+                "action": "getArticlesSuppByDate",
+                "date": date
+            }),
+            dataType: "json",
+            timeout: 10000,
+            success: successCallback,
+            error: errorCallback
+        });
+    }
+
+
+
+    return {
+        addCommande: _addCommande,
+        addDevise: _addDevise,
+        addFournisseur: _addFournisseur,
+        addUtilisateur: _addUtilisateur,
+        checkCookie: _checkCookie,
+        deleteCommande: _deleteCommande,
+        fournisseurRemplace: _fournisseurRemplace,
+        getAdresseLivraison: _getAdresseLivraison,
+        getCommandes: _getCommandes,
+        getCommandeDetails: _getCommandeDetails,
+        getCommandesSummary: _getCommandesSummary,
+        getCompteBySectionType: _getCompteBySectionType,
+        getComptesInfos: _getComptesInfos,
+        getDevise: _getDevise,
+        getDevises: _getDevises,
+        getAllFournisseurs: _getAllFournisseurs,
+        getFournisseurAValider: _getFournisseurAValider,
+        getFournisseurByPk: _getFournisseurByPk,
+        getFournisseurBySection: _getFournisseurBySection,
+        getFournisseurBySectionCom: _getFournisseurBySectionCom,
+        getFournisseursSummary: _getFournisseursSummary,
+        getPays: _getPays,
+        getRoles: _getRoles,
+        getRoleEleve: _getRoleEleve,
+        getSections: _getSections,
+        getSectionUtilisateur: _getSectionUtilisateur,
+        deleteSection: _deleteSection,
+        updateSection: _updateSection,
+        updateComptes: _updateComptes,
+        addSection: _addSection,
+        getStatutCmd: _getStatutCmd,
+        getStatutFac: _getStatutFac,
+        getStatutLiv: _getStatutLiv,
+        getTypeCmd: _getTypeCmd,
+        getTVA: _getTVA,
+        getUtilisateur: _getUtilisateur,
+        getUtilisateursBySection: _getUtilisateursBySection,
+        getElevesBySection: _getElevesBySection,
+        getUtilisateursForContact: _getUtilisateursForContact,
+        checkLogin: _checkLogin,
+        redirectToLogin: _redirectToLogin,
+        logout: _logout,
+        passwordOublie: _passwordOublie,
+        searchCommands: _searchCommands,
+        updateCommande: _updateCommande,
+        updateCommandeUrgente: _updateCommandeUrgente,
+        updateDevise: _updateDevise,
+        updateFournisseur: _updateFournisseur,
+        updateTVA: _updateTVA,
+        updateUtilisateur: _updateUtilisateur,
+        updateSectionUtilisateur: _updateSectionUtilisateur,
+        souvenirDeMoi: _souvenirDeMoi,
+        valideCommande: _valideCommande,
+        soumettreCommande: _soumettreCommande,
+        enregistrerFavoris: _enregistrerFavoris,
+        getFavoris: _getFavoris,
+        uploadPdfs: _uploadPdfs,
+        editPdfs: _editPdfs,
+        addFichierStock: _addFichierStock,
+        getDerniereDateModifStockEmf: _getDerniereDateModifStockEmf,
+        getFournisseursUsageUnique: _getFournisseursUsageUnique,
+        getFournisseursMaterielScolaire: _getFournisseursMaterielScolaire,
+        deleteFournisseur: _deleteFournisseur,
+        delFournisseursUsageUniqueSC: _delFournisseursUsageUniqueSC,
+        getCommandeFournisseur: _getCommandeFournisseur,
+        getElevesClassesBySection: _getElevesClassesBySection,
+        getAllClasses: _getAllClasses,
+        getAllClassesWithInactif: _getAllClassesWithInactif,
+        getElevesClassesBySectionWithIncatif: _getElevesClassesBySectionWithIncatif,
+        addClasse: _addClasse,
+        updateClasse: _updateClasse,
+        getAllCommandesMs: _getAllCommandesMs,
+        getFournisseurMS: _getFournisseurMS,
+        getAllArticles: _getAllArticles,
+        addArticleMS: _addArticleMS,
+        updateArticle: _updateArticle,
+        deleteArticleMS: _deleteArticleMS,
+        getArticlesDeLaCommandeMs: _getArticlesDeLaCommandeMs,
+        addLigneCommande: _addLigneCommande,
+        getFirstPKArticleASC: _getFirstPKArticleASC,
+        modifLigneCommande: _modifLigneCommande,
+        refuserCommandeMS: _refuserCommandeMS,
+        archiverCommandeMS: _archiverCommandeMS,
+        desarchiverCommandeMS: _desarchiverCommandeMS,
+        checkSiArticleActif: _checkSiArticleActif,
+        getArticlesMSaValider: _getArticlesMSaValider,
+        getCommandesMSAValider: _getCommandesMSAValider,
+        checkSiClasseActif: _checkSiClasseActif,
+        checkSiClassesActif: _checkSiClassesActif,
+        prepareCommandeToDuplicate: _prepareCommandeToDuplicate,
+        getArticlesSuppByDate: _getArticlesSuppByDate
+    };
+})();
