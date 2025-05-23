@@ -2,6 +2,32 @@
 FileName = carte_electronique_didactique_PittetL02_PCB.GBR
 AutoAperture = True
 *************************************************************
+Generating : Bottom Courtyard
+      File : carte_electronique_didactique_PittetL02_PCB_Bottom_Courtyard.gbr
+
+    Adding Layer      : Bottom Courtyard
+
+
+Used DCodes :
+    D13
+    D14
+    D64
+*************************************************************
+
+*************************************************************
+Generating : Top Courtyard
+      File : carte_electronique_didactique_PittetL02_PCB_Top_Courtyard.gbr
+
+    Adding Layer      : Top Courtyard
+
+
+Used DCodes :
+    D13
+    D14
+    D16
+*************************************************************
+
+*************************************************************
 Generating : Bottom Assembly
       File : carte_electronique_didactique_PittetL02_PCB_Bottom_Assembly.gbr
 
@@ -11,7 +37,7 @@ Generating : Bottom Assembly
 Used DCodes :
     D10
     D11
-    D13
+    D14
     D68
     D69
 *************************************************************
@@ -26,44 +52,8 @@ Generating : Top Assembly
 Used DCodes :
     D10
     D11
-    D12
     D13
-    D16
-*************************************************************
-
-*************************************************************
-Generating : Bottom Courtyard
-      File : carte_electronique_didactique_PittetL02_PCB_Bottom_Courtyard.gbr
-
-    Adding Layer      : Bottom Courtyard
-
-
-Used DCodes :
-    D12
-    D13
-    D64
-*************************************************************
-
-*************************************************************
-Generating : Bottom 3D Body
-      File : carte_electronique_didactique_PittetL02_PCB_Bottom_3D_Body.gbr
-
-    Adding Layer      : Bottom 3D Body
-
-
-Used DCodes :
-*************************************************************
-
-*************************************************************
-Generating : Top Courtyard
-      File : carte_electronique_didactique_PittetL02_PCB_Top_Courtyard.gbr
-
-    Adding Layer      : Top Courtyard
-
-
-Used DCodes :
-    D12
-    D13
+    D14
     D16
 *************************************************************
 
@@ -75,8 +65,18 @@ Generating : Body Center
 
 
 Used DCodes :
-    D13
+    D14
     D68
+*************************************************************
+
+*************************************************************
+Generating : Bottom 3D Body
+      File : carte_electronique_didactique_PittetL02_PCB_Bottom_3D_Body.gbr
+
+    Adding Layer      : Bottom 3D Body
+
+
+Used DCodes :
 *************************************************************
 
 *************************************************************
@@ -122,73 +122,6 @@ Used DCodes :
 *************************************************************
 
 *************************************************************
-Generating : Top Solder
-      File : carte_electronique_didactique_PittetL02_PCB_Soldermask_Top.gbr
-
-    Adding Layer      : Top Solder
-
-    Adding Layer      : Top Layer
-
-    Adding Layer      : Multi-Layer
-
-
-Used DCodes :
-    D18
-    D19
-    D20
-    D21
-    D22
-    D23
-    D24
-    D25
-    D26
-    D27
-    D28
-    D29
-    D30
-    D31
-    D32
-*************************************************************
-
-*************************************************************
-Generating : Bottom Layer
-      File : carte_electronique_didactique_PittetL02_PCB_Copper_Signal_Bot.gbr
-
-    Adding Layer      : Bottom Layer
-
-    Adding Layer      : Multi-Layer
-
-
-Used DCodes :
-    D16
-    D26
-    D33
-    D34
-    D35
-    D36
-    D37
-    D38
-    D39
-    D40
-    D41
-    D42
-    D43
-    D44
-    D45
-    D46
-    D47
-    D48
-    D49
-    D50
-    D51
-    D52
-    D53
-    D54
-    D55
-    D56
-*************************************************************
-
-*************************************************************
 Generating : Bottom Solder
       File : carte_electronique_didactique_PittetL02_PCB_Soldermask_Bot.gbr
 
@@ -225,8 +158,10 @@ Used DCodes :
 *************************************************************
 
 *************************************************************
-Generating : Top Layer
-      File : carte_electronique_didactique_PittetL02_PCB_Copper_Signal_Top.gbr
+Generating : Top Solder
+      File : carte_electronique_didactique_PittetL02_PCB_Soldermask_Top.gbr
+
+    Adding Layer      : Top Solder
 
     Adding Layer      : Top Layer
 
@@ -234,23 +169,21 @@ Generating : Top Layer
 
 
 Used DCodes :
-    D16
+    D18
+    D19
+    D20
+    D21
+    D22
+    D23
+    D24
+    D25
     D26
-    D33
-    D34
-    D35
-    D36
-    D37
-    D38
-    D39
-    D40
-    D41
-    D42
-    D43
-    D44
-    D45
-    D46
-    D47
+    D27
+    D28
+    D29
+    D30
+    D31
+    D32
 *************************************************************
 
 *************************************************************
@@ -263,7 +196,7 @@ Generating : Bottom Overlay
 Used DCodes :
     D10
     D11
-    D13
+    D14
     D16
     D64
     D65
@@ -285,5 +218,72 @@ Used DCodes :
     D15
     D16
     D17
+*************************************************************
+
+*************************************************************
+Generating : Bottom Layer
+      File : carte_electronique_didactique_PittetL02_PCB_Copper_Signal_Bot.gbr
+
+    Adding Layer      : Bottom Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D16
+    D28
+    D33
+    D34
+    D35
+    D36
+    D37
+    D38
+    D39
+    D40
+    D41
+    D42
+    D43
+    D44
+    D45
+    D46
+    D47
+    D48
+    D49
+    D50
+    D51
+    D52
+    D53
+    D54
+    D55
+    D56
+*************************************************************
+
+*************************************************************
+Generating : Top Layer
+      File : carte_electronique_didactique_PittetL02_PCB_Copper_Signal_Top.gbr
+
+    Adding Layer      : Top Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D16
+    D28
+    D33
+    D34
+    D35
+    D36
+    D37
+    D38
+    D39
+    D40
+    D41
+    D42
+    D43
+    D44
+    D45
+    D46
+    D47
 *************************************************************
 

@@ -1,0 +1,14 @@
+Removed Pin From Net: NetName=+5V Pin=K1-4
+Removed Pin From Net: NetName=GND Pin=K1-7
+Removed Pin From Net: NetName=GND Pin=K1-8
+Removed Pin From Net: NetName=NetK1_2 Pin=R1-2
+Removed Pin From Net: NetName=NetK1_3 Pin=R2-2
+Removed Pin From Net: NetName=NetK1_3 Pin=R3-1
+Removed Pin From Net: NetName=NetK1_2 Pin=S1-5
+Change Component Comment : Designator=C7 Old Comment=100nF New Comment=3.3uF
+Added Pin To Net: NetName=GND Pin=K1-4
+Added Pin To Net: NetName=+5V Pin=K1-8
+Added Pin To Net: NetName=NetK1_3 Pin=R1-2
+Added Pin To Net: NetName=NetK1_2 Pin=R2-2
+Added Pin To Net: NetName=NetK1_2 Pin=R3-1
+Added Pin To Net: NetName=NetK1_3 Pin=S1-5
