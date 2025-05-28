@@ -570,7 +570,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U _lfsr_next ]
 [f ]
 "82
-[; ;main.c: 82:     uint8_t bit = ((lfsr >> 7) ^ (lfsr >> 5) ^ (lfsr >> 4) ^ (lfsr >> 3)) & 1;
+[; ;main.c: 82:     uint8_t bit = (((lfsr >> 7) ^ (lfsr >> 5)) ^ (lfsr >> 4) ^ (lfsr >> 3)) & 1;
 [v _bit `uc ~T0 @X0 1 a ]
 [e = _bit -> & ^ ^ ^ >> -> _lfsr `i -> 7 `i >> -> _lfsr `i -> 5 `i >> -> _lfsr `i -> 4 `i >> -> _lfsr `i -> 3 `i -> 1 `i `uc ]
 "83

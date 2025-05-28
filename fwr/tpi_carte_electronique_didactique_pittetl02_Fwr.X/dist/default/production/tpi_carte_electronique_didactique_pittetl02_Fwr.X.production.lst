@@ -1,7 +1,7 @@
 
 
 Microchip MPLAB XC8 Assembler V2.46 build 20240104201356 
-                                                                                               Fri May 23 12:42:55 2025
+                                                                                               Wed May 28 09:18:00 2025
 
 Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1 
      1                           	processor	16F15214
@@ -386,8 +386,8 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
    372                           ; Regs used in _lfsr_next: [wreg+status,2+status,0]
    373                           
    374                           
-   375                           ;main.c: 82:     uint8_t bit = ((lfsr >> 7) ^ (lfsr >> 5) ^ (lfsr >> 4) ^ (lfsr >> 3)) &
-      +                           1;
+   375                           ;main.c: 82:     uint8_t bit = (((lfsr >> 7) ^ (lfsr >> 5)) ^ (lfsr >> 4) ^ (lfsr >> 3))
+      +                           & 1;
    376     07D5  0877               	movf	_lfsr,w
    377     07D6  00F0               	movwf	??_lfsr_next
    378     07D7  3003               	movlw	3
@@ -794,7 +794,7 @@ SFR63                0      0       0      64        0.0%
 
 
 Microchip Technology PIC Macro Assembler V2.46 build 20240104201356 
-Symbol Table                                                                                   Fri May 23 12:42:55 2025
+Symbol Table                                                                                   Wed May 28 09:18:00 2025
 
                      l23 07C1                       l32 07BD                       l29 07F8  
                      u15 07D8                       u25 07DE                       u35 07E4  

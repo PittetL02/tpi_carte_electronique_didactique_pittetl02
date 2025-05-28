@@ -14,6 +14,40 @@
 
 
 
+
+#pragma config FEXTOSC = OFF
+#pragma config RSTOSC = HFINTOSC_1MHZ
+#pragma config CLKOUTEN = OFF
+#pragma config VDDAR = HI
+
+
+#pragma config MCLRE = EXTMCLR
+#pragma config PWRTS = PWRT_OFF
+#pragma config WDTE = ON
+#pragma config BOREN = ON
+#pragma config BORV = LO
+#pragma config PPS1WAY = ON
+#pragma config STVREN = ON
+
+
+
+
+#pragma config BBSIZE = BB512
+#pragma config BBEN = OFF
+#pragma config SAFEN = OFF
+#pragma config WRTAPP = OFF
+#pragma config WRTB = OFF
+#pragma config WRTC = OFF
+#pragma config WRTSAF = OFF
+#pragma config LVP = ON
+
+
+#pragma config CP = OFF
+
+
+
+
+
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.46\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files\\Microchip\\xc8\\v2.46\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -4937,68 +4971,60 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 28 "C:\\Program Files\\Microchip\\xc8\\v2.46\\pic\\include\\xc.h" 2 3
-# 8 "main.c" 2
-
-
-
-
-
-
-
-
-#pragma config FEXTOSC = OFF
-#pragma config RSTOSC = HFINT1
-#pragma config CLKOUTEN = OFF
-#pragma config CSWEN = ON
-#pragma config FCMEN = OFF
-
-
-#pragma config MCLRE = OFF
-#pragma config PWRTE = OFF
-#pragma config WDTE = OFF
-#pragma config LPBOREN = OFF
-#pragma config BOREN = OFF
-#pragma config BORV = LOW
-#pragma config PPS1WAY = ON
-#pragma config STVREN = ON
-
-
-#pragma config WRT = OFF
-#pragma config ZCD = OFF
-#pragma config PLLEN = OFF
-#pragma config CP = OFF
-#pragma config LVP = OFF
-# 59 "main.c"
-void init(void) {
-
-    TRISAbits.TRISA5 = 0;
-    ANSELAbits.ANSA5 = 0;
-    LATAbits.LATA5 = 0;
-}
-
-
-
-
-
+# 41 "main.c" 2
+# 51 "main.c"
 uint8_t lfsr = 0xA5;
 
-uint8_t lfsr_next(void) {
 
-    uint8_t bit = ((lfsr >> 7) ^ (lfsr >> 5) ^ (lfsr >> 4) ^ (lfsr >> 3)) & 1;
-    lfsr = (lfsr << 1) | bit;
-    return lfsr & 1;
-}
+uint8_t lfsr_next(void);
+void InitPic(void);
 
 
 
+void main(void)
+{
+    InitPic();
 
-
-void main(void) {
-    init();
-
-    while (1) {
+    while (1)
+    {
         uint8_t out = lfsr_next();
         LATAbits.LATA5 = out;
         _delay((unsigned long)((10)*(4000000/4000.0)));
     }
+}
+# 80 "main.c"
+uint8_t lfsr_next(void)
+{
+    uint8_t bit = ((lfsr >> 7) ^ (lfsr >> 4) ^ (lfsr >> 2) & 1;
+    lfsr = (lfsr << 1) | bit;
+    return lfsr & 1;
+}
+# 95 "main.c"
+void InitPic(void)
+{
+
+
+
+
+
+
+    OSCCON = 0b01101010;
+
+
+
+
+    ANSELA = 0;
+
+
+
+
+    LATA = 0b00000000;
+
+
+
+
+    TRISA = 0b00000000;
+
+
+
 }

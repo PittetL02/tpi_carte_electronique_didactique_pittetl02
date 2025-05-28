@@ -48,7 +48,7 @@
 
 //----- Global Variable Definitions------------------------
 // LFSR 8 bits : taps sur bits 7, 5, 4, 3 (polynôme x^8 + x^6 + x^5 + x^4 + 1)
-uint8_t lfsr = 0xA5;  // Seed non nul
+uint8_t lfsr = 0xA5;  // 0x75 (Wikipédia) // 0xA5 (ChatGPT)(meilleur seed)
 
 //----- Function Declarations -----------------------------
 uint8_t lfsr_next(void); 
@@ -79,8 +79,8 @@ void main(void)
 
 uint8_t lfsr_next(void) 
 {
-    uint8_t bit = ((lfsr >> 7) ^ (lfsr >> 5) ^ (lfsr >> 4) ^ (lfsr >> 3)) & 1;
-    lfsr = (lfsr << 1) | bit;
+    uint8_t bit = (((lfsr >> 7) ^ (lfsr >> 5)) ^ (lfsr >> 4) ^ (lfsr >> 3)) & 1; // Bit 0,2,3 et 4 passé dans des XOR.
+    lfsr = (lfsr << 1) | bit; // décalage de bit
     return lfsr & 1;
 }
 
@@ -94,7 +94,6 @@ uint8_t lfsr_next(void)
 //--------------------------------------------------------
 void InitPic(void) 
 {
-    
 //    TRISA0 = 0;           // RA0 en sortie
 //    ANSELA = 0;           // Tous les ports A en numérique
 //    LATAbits.LATA0 = 0;   // État initial
