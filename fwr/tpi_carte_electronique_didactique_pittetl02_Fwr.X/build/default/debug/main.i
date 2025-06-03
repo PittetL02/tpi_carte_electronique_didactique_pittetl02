@@ -4995,14 +4995,13 @@ void main(void)
 # 80 "main.c"
 uint8_t lfsr_next(void)
 {
-    uint8_t bit = ((lfsr >> 7) ^ (lfsr >> 4) ^ (lfsr >> 2) & 1;
+    uint8_t bit = (((lfsr >> 7) ^ (lfsr >> 5)) ^ (lfsr >> 4) ^ (lfsr >> 3)) & 1;
     lfsr = (lfsr << 1) | bit;
     return lfsr & 1;
 }
 # 95 "main.c"
 void InitPic(void)
 {
-
 
 
 

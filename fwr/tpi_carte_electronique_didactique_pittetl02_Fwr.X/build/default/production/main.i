@@ -5007,7 +5007,6 @@ void InitPic(void)
 
 
 
-
     OSCCON = 0b01101010;
 
 

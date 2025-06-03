@@ -1,0 +1,19 @@
+Removed Pin From Net: NetName=GND Pin=C3-1
+Removed Pin From Net: NetName=-5V Pin=C3-2
+Added Component: Designator=X7(Bornes de test)
+Added Component: Designator=X8(Bornes de test)
+Added Component: Designator=X9(Bornes de test)
+Added Component: Designator=X10(Bornes de test)
+Added Component: Designator=X11(Bornes de test)
+Added Pin To Net: NetName=-5V Pin=C3-1
+Added Pin To Net: NetName=GND Pin=C3-2
+Added Pin To Net: NetName=NetQ1_1 Pin=X7-1
+Added Pin To Net: NetName=NetK2_1 Pin=X8-1
+Added Pin To Net: NetName=NetK2_7 Pin=X9-1
+Added Pin To Net: NetName=NetQ2_1 Pin=X10-1
+Added Pin To Net: NetName=NetC7_2 Pin=X11-1
+Added Member To Class: ClassName=carte_electronique_didactique_PittetL02_SCH Member=Component X7 Bornes de Test
+Added Member To Class: ClassName=carte_electronique_didactique_PittetL02_SCH Member=Component X8 Bornes de Test
+Added Member To Class: ClassName=carte_electronique_didactique_PittetL02_SCH Member=Component X9 Bornes de Test
+Added Member To Class: ClassName=carte_electronique_didactique_PittetL02_SCH Member=Component X10 Bornes de Test
+Added Member To Class: ClassName=carte_electronique_didactique_PittetL02_SCH Member=Component X11 Bornes de Test

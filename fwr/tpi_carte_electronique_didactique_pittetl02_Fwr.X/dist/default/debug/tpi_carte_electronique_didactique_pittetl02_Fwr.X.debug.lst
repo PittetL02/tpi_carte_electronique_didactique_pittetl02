@@ -1,7 +1,7 @@
 
 
 Microchip MPLAB XC8 Assembler V2.46 build 20240104201356 
-                                                                                               Fri May 23 12:28:03 2025
+                                                                                               Mon Jun 02 08:35:09 2025
 
 Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1 
      1                           	processor	16F15214
@@ -386,8 +386,8 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
    372                           ; Regs used in _lfsr_next: [wreg+status,2+status,0]
    373                           
    374                           
-   375                           ;main.c: 82:     uint8_t bit = ((lfsr >> 7) ^ (lfsr >> 5) ^ (lfsr >> 4) ^ (lfsr >> 3)) &
-      +                           1;
+   375                           ;main.c: 82:     uint8_t bit = (((lfsr >> 7) ^ (lfsr >> 5)) ^ (lfsr >> 4) ^ (lfsr >> 3))
+      +                           & 1;
    376     07D5  0877               	movf	_lfsr,w
    377     07D6  00F0               	movwf	??_lfsr_next
    378     07D7  3003               	movlw	3
@@ -475,23 +475,23 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
    460                           ; Regs used in _InitPic: [wreg+status,2]
    461                           
    462                           
-   463                           ;main.c: 103:     OSCCON = 0b01101010;
+   463                           ;main.c: 102:     OSCCON = 0b01101010;
    464     07B5  306A               	movlw	106
    465     07B6  0151               	movlb	17	; select bank17
    466     07B7  008E               	movwf	14	;volatile
    467     07B8                     l560:
    468                           
-   469                           ;main.c: 108:     ANSELA = 0;
+   469                           ;main.c: 107:     ANSELA = 0;
    470     07B8  017E               	movlb	62	; select bank62
    471     07B9  01B8               	clrf	56	;volatile
    472     07BA                     l562:
    473                           
-   474                           ;main.c: 113:     LATA = 0b00000000;
+   474                           ;main.c: 112:     LATA = 0b00000000;
    475     07BA  0140               	movlb	0	; select bank0
    476     07BB  0198               	clrf	24	;volatile
    477     07BC                     l564:
    478                           
-   479                           ;main.c: 118:     TRISA = 0b00000000;
+   479                           ;main.c: 117:     TRISA = 0b00000000;
    480     07BC  0192               	clrf	18	;volatile
    481     07BD                     l32:
    482     07BD  0008               	return
@@ -503,16 +503,16 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1
    488                           
    489                           ;Config register CONFIG1 @ 0x8007
    490                           ;	External Oscillator Mode Selection bits
-   491                           ;	FEXTOSC = ECH, EC (external clock) 16 MHz and above
+   491                           ;	FEXTOSC = OFF, Oscillator not enabled
    492                           ;	Power-up Default Value for COSC bits
-   493                           ;	RSTOSC = EXTOSC, EXTOSC operating per FEXTOSC bits
+   493                           ;	RSTOSC = HFINTOSC_1MHZ, HFINTOSC (1 MHz)
    494                           ;	Clock Out Enable bit
    495                           ;	CLKOUTEN = OFF, CLKOUT function is disabled; I/O function on RA4
    496                           ;	VDD Range Analog Calibration Selection bit
    497                           ;	VDDAR = HI, Internal analog systems are calibrated for operation between VDD = 2.3V - 
       +                          5.5V
    498     8007                     	org	32775
-   499     8007  3FFF               	dw	16383
+   499     8007  3FED               	dw	16365
    500                           
    501                           ;Config register CONFIG2 @ 0x8008
    502                           ;	Master Clear Enable bit
@@ -794,7 +794,7 @@ SFR63                0      0       0      64        0.0%
 
 
 Microchip Technology PIC Macro Assembler V2.46 build 20240104201356 
-Symbol Table                                                                                   Fri May 23 12:28:03 2025
+Symbol Table                                                                                   Mon Jun 02 08:35:09 2025
 
                      l23 07C1                       l32 07BD                       l29 07F8  
                      u15 07D8                       u25 07DE                       u35 07E4  
