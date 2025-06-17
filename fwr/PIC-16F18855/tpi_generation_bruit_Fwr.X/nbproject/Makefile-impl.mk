@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=tpi_carte_electronique_didactique_pittetl02_Fwr.X
+PROJECTNAME=tpi_generation_bruit_Fwr.X
 
 # Active Configuration
 DEFAULTCONF=default

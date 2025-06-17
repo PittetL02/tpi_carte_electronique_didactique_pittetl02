@@ -1,0 +1,7 @@
+Removed Pin From Net: NetName=NetK2_7 Pin=X1-1
+Removed Pin From Net: NetName=NetR1_1 Pin=X1-2
+Removed Member From Class: ClassName=carte_electronique_didactique_PittetL02_SCH Member=X1
+Added Component: Designator=S3(Slide Switches)
+Added Pin To Net: NetName=NetR1_1 Pin=S3-4
+Added Pin To Net: NetName=NetK2_7 Pin=S3-5
+Added Member To Class: ClassName=carte_electronique_didactique_PittetL02_SCH Member=Component S3 Switch On-On

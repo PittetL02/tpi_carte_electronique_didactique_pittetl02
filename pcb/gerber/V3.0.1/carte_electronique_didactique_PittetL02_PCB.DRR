@@ -1,0 +1,24 @@
+----------------------------------------------------------------------------------------------------------------------------------
+NCDrill File Report For: carte_electronique_didactique_PittetL02_PCB.PcbDoc   17.06.2025  13:53:08
+----------------------------------------------------------------------------------------------------------------------------------
+
+Layer Pair : Top Layer to Bottom Layer
+ASCII Plated RoundHoles File : carte_electronique_didactique_PittetL02_PCB-Plated.TXT
+ASCII Non-Plated RoundHoles File : carte_electronique_didactique_PittetL02_PCB-NonPlated.TXT
+EIA File   : carte_electronique_didactique_PittetL02_PCB.DRL
+
+Tool       Hole Size               Hole Tolerance               Hole Type       Hole Count   Plated         Tool Travel
+----------------------------------------------------------------------------------------------------------------------------------
+T1      0.5mm (20mil)                                             Round             11        PTH        185.35mm (7.30inch)
+T2      0.78mm (31mil)                                            Round             8         PTH        23.18mm (0.91inch)
+T3      0.9mm (35mil)                                             Round             20        PTH        239.66mm (9.44inch)
+T4      1mm (39mil)             +/-0mm (0mil)                     Round             19        PTH        337.98mm (13.31inch)
+T5      1mm (39mil)                                               Round             4         PTH        66.57mm (2.62inch)
+T6      1.001mm (39mil)                                           Round             8         PTH        101.10mm (3.98inch)
+T7      1.6mm (63mil)                                             Round             12        PTH        79.63mm (3.13inch)
+T8      0.9mm (35mil)                                             Round             3         NPTH       7.21mm (0.28inch)
+T10     3.1mm (122mil)                                            Round             4         NPTH       358.74mm (14.12inch)
+----------------------------------------------------------------------------------------------------------------------------------
+Totals                                                                              89
+
+Total Processing Time (hh:mm:ss) : 00:00:00

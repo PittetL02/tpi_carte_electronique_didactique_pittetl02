@@ -1,0 +1,25 @@
+Removed Pin From Net: NetName=NetK1_1 Pin=K1-1
+Removed Pin From Net: NetName=GND Pin=K1-5
+Removed Pin From Net: NetName=NetK1_3 Pin=R4-1
+Removed Pin From Net: NetName=NetK1_1 Pin=S1-4
+Removed Pin From Net: NetName=NetR1_1 Pin=S3-4
+Removed Pin From Net: NetName=NetK2_7 Pin=S3-5
+Removed Pin From Net: NetName=NetR1_1 Pin=TP1-1
+Removed Pin From Net: NetName=NetK1_1 Pin=TP4-1
+Removed Pin From Net: NetName=NetK1_1 Pin=TP5-1
+Added Pin To Net: NetName=NetK1_3 Pin=S1-5
+Added Pin To Net: NetName=NetK2_7 Pin=S3-1
+Added Pin To Net: NetName=NetR1_1 Pin=S3-2
+Change Net Name : Old Net Name=NetK1_1 New Net Name=NetK1_6
+Added Pin To Net: NetName=NetK1_1 Pin=K1-1
+Added Pin To Net: NetName=NetK1_1 Pin=K1-5
+Added Pin To Net: NetName=NetK1_1 Pin=R4-2
+Added Pin To Net: NetName=NetK1_1 Pin=TP4-1
+Added Pin To Net: NetName=NetK1_1 Pin=TP5-1
+Added Net: Name=NetK1_1
+Added Pin To Net: NetName=NetR4_1 Pin=R4-1
+Added Pin To Net: NetName=NetR4_1 Pin=S1-4
+Added Net: Name=NetR4_1
+Added Pin To Net: NetName=NetS3_3 Pin=S3-3
+Added Pin To Net: NetName=NetS3_3 Pin=TP1-1
+Added Net: Name=NetS3_3

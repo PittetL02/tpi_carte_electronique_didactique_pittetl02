@@ -1,0 +1,15 @@
+Removed Pin From Net: NetName=GND Pin=K1-6
+Removed Pin From Net: NetName=NetK1_1 Pin=R4-2
+Removed Pin From Net: NetName=NetK1_3 Pin=S1-5
+Removed Pin From Net: NetName=NetK1_1 Pin=X2-1
+Removed Member From Class: ClassName=carte_electronique_didactique_PittetL02_SCH Member=X2
+Added Pin To Net: NetName=NetK1_1 Pin=K1-6
+Added Pin To Net: NetName=NetK1_1 Pin=K1-7
+Added Pin To Net: NetName=NetK1_3 Pin=R4-1
+Added Pin To Net: NetName=NetK1_1 Pin=R12-1
+Added Pin To Net: NetName=NetK1_1 Pin=S1-4
+Change Net Name : Old Net Name=NetC10_2 New Net Name=NetC2_2
+Added Pin To Net: NetName=NetR4_2 Pin=R4-2
+Added Pin To Net: NetName=NetR4_2 Pin=S1-5
+Added Net: Name=NetR4_2
+Added Member To Class: ClassName=carte_electronique_didactique_PittetL02_SCH Member=Component C2 0.1uF

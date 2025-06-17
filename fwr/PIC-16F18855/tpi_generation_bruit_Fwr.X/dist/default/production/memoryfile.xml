@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
-  <executable name="dist/default/production\tpi_carte_electronique_didactique_pittetl02_Fwr.X.production.hex">
+  <executable name="dist/default/production\tpi_generation_bruit_Fwr.X.production.hex">
     <memory name="program">
       <units>words</units>
       <length>4096</length>

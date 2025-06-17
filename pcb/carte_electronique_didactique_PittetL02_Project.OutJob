@@ -2,15 +2,15 @@
 Version=1.0
 
 [PublishSettings]
-OutputFilePath2=C:\Users\PittetL02\OneDrive - EDUETATFR\TPI_PITTETL02\tpi_carte_electronique_didactique_pittetl02\pcb\pdf\SCH\.PDF
+OutputFilePath2=C:\Users\PittetL02\OneDrive - EDUETATFR\TPI_PITTETL02\tpi_carte_electronique_didactique_pittetl02\pcb\pdf\SCH\V3.0.1\.PDF
 ReleaseManaged2=0
-OutputBasePath2=C:\Users\PittetL02\OneDrive - EDUETATFR\TPI_PITTETL02\tpi_carte_electronique_didactique_pittetl02\pcb\pdf\SCH\
+OutputBasePath2=C:\Users\PittetL02\OneDrive - EDUETATFR\TPI_PITTETL02\tpi_carte_electronique_didactique_pittetl02\pcb\pdf\SCH\V3.0.1\
 OutputPathMedia2=
 OutputPathMediaValue2=
 OutputPathOutputer2=[Output Type]
 OutputPathOutputerPrefix2=
 OutputPathOutputerValue2=
-OutputFileName2=carte_electronique_didactique_PittetL02_SCH_3.pdf
+OutputFileName2=carte_electronique_didactique_PittetL02_Project.pdf
 OutputFileNameMulti2=
 UseOutputNameForMulti2=1
 OutputFileNameSpecial2=
@@ -81,7 +81,7 @@ WmvVideoCodecName4=Windows Media Video V7
 WmvQuality4=80
 
 [GeneratedFilesSettings]
-RelativeOutputPath2=C:\Users\PittetL02\OneDrive - EDUETATFR\TPI_PITTETL02\tpi_carte_electronique_didactique_pittetl02\pcb\pdf\SCH\.PDF
+RelativeOutputPath2=C:\Users\PittetL02\OneDrive - EDUETATFR\TPI_PITTETL02\tpi_carte_electronique_didactique_pittetl02\pcb\pdf\SCH\V3.0.1\.PDF
 OpenOutputs2=1
 RelativeOutputPath3=
 OpenOutputs3=1
